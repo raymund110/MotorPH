@@ -7,7 +7,7 @@ public class EmployeeDataFromFile {
     private Employee[] employees;
 
     public EmployeeDataFromFile() {
-        String employeeData = "motorph/src/main/resources/MotorPH Employee Data.csv";
+        String employeeData = "src/main/resources/MotorPH Employee Data.csv";
         employees = new Employee[50];
         dataFromFile(employeeData);
     }

@@ -91,7 +91,7 @@ public class Main {
                 double weeklyGross = monthlyGross / 4;
 
                 // Calculate weekly net (after deductions)
-                double weeklyNet = weeklyGross - salaryDeduction.getTotalDeductions(employee.getBasicSalary()) / 4;
+                double weeklyNet = weeklyGross - salaryDeduction.totalSalaryDeductions(employee.getBasicSalary()) / 4;
 
                 System.out.print("Last Name: " + employee.getLastName()
                         + ", First Name: " + employee.getFirstName()

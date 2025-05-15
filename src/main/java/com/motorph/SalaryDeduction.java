@@ -4,7 +4,7 @@ public class SalaryDeduction {
 
     private double salary;
 
-    private double getSSSdeduction() {
+    private double sssdeduction() {
         final int constant = 25000;
         if ((int) Math.round(salary) < constant) {
             return salary * 0.045;
@@ -12,7 +12,7 @@ public class SalaryDeduction {
         return constant * 0.045;
     }
 
-    private double getWithholdingTax() {
+    private double withholdingTax() {
         double withHoldingTax = 0;
         if (salary > 20833 && salary <= 33333) {
             withHoldingTax = (salary - 20833) * 0.15;
@@ -28,7 +28,7 @@ public class SalaryDeduction {
         return withHoldingTax;
     }
 
-    private double getPagibigDeduction() {
+    private double pagibigDeduction() {
         final double minimunCompensation = 1500;
         if (salary > minimunCompensation) {
             return salary * 0.02;
@@ -36,12 +36,12 @@ public class SalaryDeduction {
         return salary * 0.01;
     }
 
-    private double getPhilHealthDeduction() {
+    private double philHealthDeduction() {
         return salary * 0.05;
     }
 
-    public double getTotalDeductions(double salary) {
+    public double totalSalaryDeductions(double salary) {
         this.salary = salary;
-        return getSSSdeduction() + getPagibigDeduction() + getPhilHealthDeduction() + getWithholdingTax();
+        return sssdeduction() + pagibigDeduction() + philHealthDeduction() + withholdingTax();
     }
 }

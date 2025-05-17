@@ -1,22 +1,19 @@
 package com.motorph;
 
+import java.time.LocalDate;
+
 public class Employee {
 
-    private String employeeNumber;
-    private String firstName;
-    private String lastName;
-    private String birthday;
-    private double basicSalary;
-    private double riceSubsidy;
-    private double phoneAllowance;
-    private double clothingAllowance;
-    private double hourlyRate;
+    private int employeeNumber;
+    private String firstName, lastName;
+    private LocalDate birthday;
+    private double basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, hourlyRate;
 
-    public String getEmployeeNumber() {
+    public int getEmployeeNumber() {
         return employeeNumber;
     }
 
-    public void setEmployeeNumber(String employeeNumber) {
+    public void setEmployeeNumber(int employeeNumber) {
         this.employeeNumber = employeeNumber;
     }
 
@@ -36,11 +33,11 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

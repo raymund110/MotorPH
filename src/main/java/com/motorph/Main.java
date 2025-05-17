@@ -4,16 +4,14 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static EmployeeDataFromFile employeeDataFromFile;
-    public static SalaryDeduction salaryDeduction;
+    public static EmployeeDataFromFile employeeDataFromFile = new EmployeeDataFromFile();
+    public static SalaryDeduction salaryDeduction = new SalaryDeduction();
 
     static Scanner scan = new Scanner(System.in);
     static Employee employeeData = new Employee();
     static boolean loop = true;
 
     public static void main(String[] args) {
-        employeeDataFromFile = new EmployeeDataFromFile();
-        salaryDeduction = new SalaryDeduction();
 
         while (loop) {
             mainMenu();

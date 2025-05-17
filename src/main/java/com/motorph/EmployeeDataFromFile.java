@@ -2,6 +2,8 @@ package com.motorph;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EmployeeDataFromFile {
     private Employee[] employees;
@@ -38,10 +40,12 @@ public class EmployeeDataFromFile {
     private Employee createEmployee(String[] values) {
         Employee employee = new Employee();
         try {
-            employee.setEmployeeNumber(values[0].trim());
+            employee.setEmployeeNumber(Integer.parseInt(values[0].trim()));
             employee.setLastName(values[1].trim());
             employee.setFirstName(values[2].trim());
-            employee.setBirthday(values[3].trim());
+
+            DateTimeFormatter birtdayFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            employee.setBirthday(LocalDate.parse(values[3].trim(), birtdayFormat));
             // Parse salary and allowances
             String basicSalary = values[13].replace(",", "").replace("\"", "").trim();
             String riceSubsidy = values[14].replace(",", "").replace("\"", "").trim();

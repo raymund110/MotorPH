@@ -39,6 +39,8 @@ public class EmployeeDataFromFile {
 
     private Employee createEmployee(String[] values) {
         Employee employee = new Employee();
+        Compensation compensation = new Compensation();
+        ContactInfo contactInfo = new ContactInfo();
         try {
             employee.setEmployeeNumber(Integer.parseInt(values[0].trim()));
             employee.setLastName(values[1].trim());
@@ -46,6 +48,11 @@ public class EmployeeDataFromFile {
 
             DateTimeFormatter birtdayFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             employee.setBirthday(LocalDate.parse(values[3].trim(), birtdayFormat));
+
+            // Contacts
+            contactInfo.setAddress(values[4].trim());
+            contactInfo.setPhoneNumber(values[5].trim());
+
             // Parse salary and allowances
             String basicSalary = values[13].replace(",", "").replace("\"", "").trim();
             String riceSubsidy = values[14].replace(",", "").replace("\"", "").trim();
@@ -53,11 +60,11 @@ public class EmployeeDataFromFile {
             String clothingAllowance = values[16].replace(",", "").replace("\"", "").trim();
             String hourlyRate = values[18].replace(",", "").replace("\"", "").trim();
 
-            employee.setBasicSalary(Double.parseDouble(basicSalary));
-            employee.setRiceSubsidy(Double.parseDouble(riceSubsidy));
-            employee.setPhoneAllowance(Double.parseDouble(phoneAllowance));
-            employee.setClothingAllowance(Double.parseDouble(clothingAllowance));
-            employee.setHourlyRate(Double.parseDouble(hourlyRate));
+            compensation.setBasicSalary(Double.parseDouble(basicSalary));
+            compensation.setRiceSubsidy(Double.parseDouble(riceSubsidy));
+            compensation.setPhoneAllowance(Double.parseDouble(phoneAllowance));
+            compensation.setClothingAllowance(Double.parseDouble(clothingAllowance));
+            compensation.setHourlyRate(Double.parseDouble(hourlyRate));
         } catch (Exception e) {
             System.out.println("Error creating employee: " + e.getMessage());
         }

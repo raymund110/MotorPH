@@ -35,7 +35,7 @@ public class Main {
                 break;
 
             case "2":
-                calculateSalary();
+                // calculateSalary();
                 break;
 
             case "3":
@@ -69,41 +69,42 @@ public class Main {
         }
     }
 
-    public static void calculateSalary() {
-        Employee[] employeeList = employeeDataFromFile.getEmployeeData();
+    // public static void calculateSalary() {
+    // Employee[] employeeList = employeeDataFromFile.getEmployeeData();
 
-        System.out.println("--------------------------------------");
-        System.out.println("--------- Total Weekly Salary --------");
-        System.out.println("--------------------------------------");
+    // System.out.println("--------------------------------------");
+    // System.out.println("--------- Total Weekly Salary --------");
+    // System.out.println("--------------------------------------");
 
-        for (int i = 0; i < employeeList.length; i++) {
-            Employee employee = employeeList[i];
-            if (employee != null) {
-                // Calculate monthly gross (basic + allowances)
-                double monthlyGross = employee.getBasicSalary() +
-                        employee.getRiceSubsidy() +
-                        employee.getPhoneAllowance() +
-                        employee.getClothingAllowance();
+    // for (int i = 0; i < employeeList.length; i++) {
+    // Employee employee = employeeList[i];
+    // if (employee != null) {
+    // // Calculate monthly gross (basic + allowances)
+    // double monthlyGross = employee.getBasicSalary() +
+    // employee.getRiceSubsidy() +
+    // employee.getPhoneAllowance() +
+    // employee.getClothingAllowance();
 
-                // Convert to weekly (divide by 4)
-                double weeklyGross = monthlyGross / 4;
+    // // Convert to weekly (divide by 4)
+    // double weeklyGross = monthlyGross / 4;
 
-                // Calculate weekly net (after deductions)
-                double weeklyNet = weeklyGross - salaryDeduction.totalSalaryDeductions(employee.getBasicSalary()) / 4;
+    // // Calculate weekly net (after deductions)
+    // double weeklyNet = weeklyGross -
+    // salaryDeduction.totalSalaryDeductions(employee.getBasicSalary()) / 4;
 
-                System.out.print("Last Name: " + employee.getLastName()
-                        + ", First Name: " + employee.getFirstName()
-                        + "\nMonthly Basic Salary: PHP " + employee.getBasicSalary()
-                        + "\nAllowances:"
-                        + "\n  - Rice Subsidy: PHP " + employee.getRiceSubsidy()
-                        + "\n  - Phone Allowance: PHP " + employee.getPhoneAllowance()
-                        + "\n  - Clothing Allowance: PHP " + employee.getClothingAllowance()
-                        + "\nMonthly Gross Salary: PHP " + monthlyGross
-                        + "\nWeekly Gross Salary: PHP " + weeklyGross
-                        + "\nWeekly Net Salary: PHP " + weeklyNet
-                        + "\n----------------------------------------\n");
-            }
-        }
-    }
+    // System.out.print("Last Name: " + employee.getLastName()
+    // + ", First Name: " + employee.getFirstName()
+    // + "\nMonthly Basic Salary: PHP " + employee.getBasicSalary()
+    // + "\nAllowances:"
+    // + "\n - Rice Subsidy: PHP " + employee.getRiceSubsidy()
+    // + "\n - Phone Allowance: PHP " + employee.getPhoneAllowance()
+    // + "\n - Clothing Allowance: PHP " + employee.getClothingAllowance()
+    // + "\nMonthly Gross Salary: PHP " + monthlyGross
+    // + "\nWeekly Gross Salary: PHP " + weeklyGross
+    // + "\nWeekly Net Salary: PHP " + weeklyNet
+    // + "\n----------------------------------------\n");
+    // }
+    // }
+    // }
 
 }

@@ -12,16 +12,16 @@ public class Main {
     public static AttendanceDataFromFile attendanceDataFromFile = new AttendanceDataFromFile();
 
     static Scanner scan = new Scanner(System.in);
-    static Employee employeeData = new Employee();
     static boolean loop = true;
 
     public static void main(String[] args) {
 
-        while (loop) {
-            mainMenu();
-            String choice = scan.nextLine();
-            options(choice);
-        }
+        new frameLogin();
+//        while (loop) {
+//            mainMenu();
+//            String choice = scan.nextLine();
+//            options(choice);
+//        }
     }
 
     public static void mainMenu() {

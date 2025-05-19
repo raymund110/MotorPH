@@ -15,8 +15,8 @@ public class Main {
     static boolean loop = true;
 
     public static void main(String[] args) {
-        new employeeFrame();
-//        new frameLogin();
+//        new employeeFrame();
+        new frameLogin();
 //        while (loop) {
 //            mainMenu();
 //            String choice = scan.nextLine();

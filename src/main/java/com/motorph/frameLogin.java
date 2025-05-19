@@ -49,8 +49,7 @@ public class frameLogin extends JFrame {
                     }
 
                     if (correct) {
-                        login.setEmployeeNum(empNum); // set the employee number to connect to the employee frame;
-                        new employeeFrame();
+                        new employeeFrame(empNum);
                         dispose(); // Close the login window
                     } else {
                         JOptionPane.showMessageDialog(btnLogin, "Wrong Employee Number and Password Try Again!");

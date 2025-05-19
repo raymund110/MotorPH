@@ -1,6 +1,6 @@
 package com.motorph;
 
-public class logininfo {
+public class LoginInfo {
 
     private String employeeNum;
     private String employeePass;

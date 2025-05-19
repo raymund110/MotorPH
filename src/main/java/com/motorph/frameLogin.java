@@ -3,6 +3,7 @@ package com.motorph;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.regex.Pattern;
 
 public class frameLogin extends JFrame {
     private JPanel panelLogin;
@@ -28,13 +29,11 @@ public class frameLogin extends JFrame {
                 String empNum = txtEmpNum.getText();
                 String empPass = new String(password.getPassword());
                 File file = new File ("src/main/resources/Sheet1.csv");
-                logininfo login = new logininfo();
+                LoginInfo login = new LoginInfo();
 
                 try (BufferedReader reader = new BufferedReader(new FileReader(file))){
                     String line;
                     boolean correct = false;
-
-                    reader.readLine();
 
                     while ((line = reader.readLine()) != null) {
                         String[] value = line.split(",");
@@ -50,6 +49,7 @@ public class frameLogin extends JFrame {
                     }
 
                     if (correct) {
+                        login.setEmployeeNum(empNum); // set the employee number to connect to the employee frame;
                         new employeeFrame();
                         dispose(); // Close the login window
                     } else {
@@ -67,31 +67,4 @@ public class frameLogin extends JFrame {
             }
         });
     }
-
-//    public boolean validateLogin(String empNum, String empPass) {
-//        logininfo login = new logininfo();
-//        String csvFile = "src/main/resources/Sheet1.csv";
-//        String line;
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-//            // Skip the header line if it exists
-//            br.readLine();
-//
-//            while ((line = br.readLine()) != null) {
-//                String[] credentials = line.split(",");
-//                if (credentials.length >= 2) {
-//                    login.setEmployeeNum(credentials[0].trim());
-//                    login.setEmployeePass(credentials[2].trim());
-//
-//                    if (empNum.equals(login.getEmployeeNum()) && empPass.equals(login.getEmployeePass())) {
-//                        return true;
-//                    }
-//                }
-//            }
-//        } catch (IOException ex) {
-//            JOptionPane.showMessageDialog(btnLogin, "Error Reading Credentials");
-//            return false;
-//        }
-//        return false;
-//    }
 }

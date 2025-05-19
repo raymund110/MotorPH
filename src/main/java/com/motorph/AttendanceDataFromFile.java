@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AttendanceDataFromFile {
-    private List<Attendance> attendanceList;
+    private final List<Attendance> attendanceList;
     private static final String ATTENDANCE_FILE = "src/main/resources/Attendance Record.csv";
 
     public AttendanceDataFromFile() {

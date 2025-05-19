@@ -40,4 +40,8 @@ public class frameLogin extends JFrame{
         });
     }
 
+    private void passData () {
+
+    }
+
 }

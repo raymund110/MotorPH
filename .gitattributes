@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+src/main/resources/pass.csv
+pom.xml
+.idea

@@ -15,8 +15,8 @@ public class Main {
     static boolean loop = true;
 
     public static void main(String[] args) {
-//        new employeeFrame();
         new frameLogin();
+//        new employeeFrame("10003");
 //        while (loop) {
 //            mainMenu();
 //            String choice = scan.nextLine();
@@ -67,37 +67,37 @@ public class Main {
 //        }
 //    }
 
-    public static void listOfEmployees(int searchEmployeeNumber) {
-        Employee[] employeeList = employeeDataFromFile.getEmployeeData();
-        boolean found = false;
-
-        System.out.println("--------------------------------------");
-        System.out.println("---------- Employee Details ----------");
-        System.out.println("--------------------------------------");
-
-        for (Employee employee : employeeList) {
-            if (employee != null && employee.getEmployeeNumber() == searchEmployeeNumber) {
-                System.out.print("Employee Number: " + employee.getEmployeeNumber()
-                        + "\nEmployee Name: " + employee.getPerson().getLastName() + " "
-                        + employee.getPerson().getFirstName() + "\nStatus: " + employee.getStatus()
-                        + "\nBirthday: " + employee.getBirthday()
-                        + "\nAddress: " + employee.getContactInfo().getAddress()
-                        + "\nPhone Number: " + employee.getContactInfo().getPhoneNumber() + "\nPosition: "
-                        + employee.getJob().getPosition() + "\nImmediate Supervisor: "
-                        + employee.getJob().getSupervisor() + "\n" + "\nGovernment ID"
-                        + "\nSSS #: " + employee.getGovID().getsssID() +
-                        "\nPhilhealth #: " + employee.getGovID().getphilhealthID() + "\nTIN #: "
-                        + employee.getGovID().gettinID() + "\nPag-ibig #: " + employee.getGovID().getpagibigID()
-                        + "\n");
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            System.out.println("Employee not found with employee number: " + searchEmployeeNumber);
-        }
-    }
+//    public static void listOfEmployees(int searchEmployeeNumber) {
+//        Employee[] employeeList = employeeDataFromFile.getEmployeeData();
+//        boolean found = false;
+//
+//        System.out.println("--------------------------------------");
+//        System.out.println("---------- Employee Details ----------");
+//        System.out.println("--------------------------------------");
+//
+//        for (Employee employee : employeeList) {
+//            if (employee != null && employee.getEmployeeNumber() == searchEmployeeNumber) {
+//                System.out.print("Employee Number: " + employee.getEmployeeNumber()
+//                        + "\nEmployee Name: " + employee.getPerson().getLastName() + " "
+//                        + employee.getPerson().getFirstName() + "\nStatus: " + employee.getStatus()
+//                        + "\nBirthday: " + employee.getBirthday()
+//                        + "\nAddress: " + employee.getContactInfo().getAddress()
+//                        + "\nPhone Number: " + employee.getContactInfo().getPhoneNumber() + "\nPosition: "
+//                        + employee.getJob().getPosition() + "\nImmediate Supervisor: "
+//                        + employee.getJob().getSupervisor() + "\n" + "\nGovernment ID"
+//                        + "\nSSS #: " + employee.getGovID().getsssID() +
+//                        "\nPhilhealth #: " + employee.getGovID().getphilhealthID() + "\nTIN #: "
+//                        + employee.getGovID().gettinID() + "\nPag-ibig #: " + employee.getGovID().getpagibigID()
+//                        + "\n");
+//                found = true;
+//                break;
+//            }
+//        }
+//
+//        if (!found) {
+//            System.out.println("Employee not found with employee number: " + searchEmployeeNumber);
+//        }
+//    }
 
     public static void calculateSalary(int searchEmployeeNumber) {
         try {

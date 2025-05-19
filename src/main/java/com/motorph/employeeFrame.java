@@ -10,6 +10,7 @@ import java.io.FileReader;
 public class employeeFrame extends JFrame {
 
     private JPanel empDashboard;
+    private JTextArea txtAttendance;
     private JTextField textField1;
     private JLabel lblEmployeeNumber;
     private JLabel lblName;

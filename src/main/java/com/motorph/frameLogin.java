@@ -52,7 +52,7 @@ public class frameLogin extends JFrame {
                         new employeeFrame(empNum);
                         dispose(); // Close the login window
                     } else {
-                        JOptionPane.showMessageDialog(btnLogin, "Wrong Employee Number and Password Try Again!");
+                        JOptionPane.showMessageDialog(frameLogin.this, "Wrong Employee Number and Password Try Again!");
                         // Clear the fields
                         txtEmpNum.setText("");
                         password.setText("");

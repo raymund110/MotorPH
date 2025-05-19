@@ -5,9 +5,21 @@ import java.time.LocalDate;
 public class Employee {
 
     private int employeeNumber;
-    private String firstName, lastName;
+    private String status;
+    private Person person;
     private LocalDate birthday;
-    private double basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, hourlyRate;
+    private Compensation compensation;
+    private ContactInfo contactInfo;
+    private GovernmentID govID;
+    private Job job;
+
+    public Employee() {
+        this.person = new Person();
+        this.contactInfo = new ContactInfo();
+        this.govID = new GovernmentID();
+        this.job = new Job();
+        this.compensation = new Compensation();
+    }
 
     public int getEmployeeNumber() {
         return employeeNumber;
@@ -15,22 +27,6 @@ public class Employee {
 
     public void setEmployeeNumber(int employeeNumber) {
         this.employeeNumber = employeeNumber;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public LocalDate getBirthday() {
@@ -41,44 +37,52 @@ public class Employee {
         this.birthday = birthday;
     }
 
-    public double getBasicSalary() {
-        return basicSalary;
+    public String getStatus() {
+        return status;
     }
 
-    public void setBasicSalary(double basicSalary) {
-        this.basicSalary = basicSalary;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public double getHourlyRate() {
-        return hourlyRate;
+    public Compensation getCompensation() {
+        return compensation;
     }
 
-    public void setHourlyRate(double hourlyRate) {
-        this.hourlyRate = hourlyRate;
+    public void setCompensation(Compensation compensation) {
+        this.compensation = compensation;
     }
 
-    public double getRiceSubsidy() {
-        return riceSubsidy;
+    public ContactInfo getContactInfo() {
+        return contactInfo;
     }
 
-    public void setRiceSubsidy(double riceSubsidy) {
-        this.riceSubsidy = riceSubsidy;
+    public void setContactInfo(ContactInfo contactInfo) {
+        this.contactInfo = contactInfo;
     }
 
-    public double getPhoneAllowance() {
-        return phoneAllowance;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPhoneAllowance(double phoneAllowance) {
-        this.phoneAllowance = phoneAllowance;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    public double getClothingAllowance() {
-        return clothingAllowance;
+    public GovernmentID getGovID() {
+        return govID;
     }
 
-    public void setClothingAllowance(double clothingAllowance) {
-        this.clothingAllowance = clothingAllowance;
+    public void setGovID(GovernmentID govID) {
+        this.govID = govID;
+    }
+
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
     }
 
 }

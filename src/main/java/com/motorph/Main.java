@@ -24,48 +24,48 @@ public class Main {
 //        }
     }
 
-    public static void mainMenu() {
-        System.out.println("-----MotorPH-----");
-        System.out.println("1. Search Employee");
-        System.out.println("2. Calculate Salary");
-        System.out.println("3. Exit Program");
-        System.out.print("Enter Choice: ");
-    }
-
-    public static void options(String option) {
-        switch (option) {
-            case "1":
-                System.out.print("Enter Employee Number: ");
-                String empNum = scan.nextLine();
-                try {
-                    int employeeNumber = Integer.parseInt(empNum);
-                    listOfEmployees(employeeNumber);
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid employee number format. Please enter a valid number.");
-                }
-                break;
-
-            case "2":
-                System.out.print("Enter Employee Number: ");
-                String empNumSalary = scan.nextLine();
-                try {
-                    int employeeNumber = Integer.parseInt(empNumSalary);
-                    calculateSalary(employeeNumber);
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid employee number format. Please enter a valid number.");
-                }
-                break;
-
-            case "3":
-                System.out.println("Closing Program...");
-                loop = false;
-                break;
-
-            default:
-                System.out.println("Invalid Input Try again!");
-                break;
-        }
-    }
+//    public static void mainMenu() {
+//        System.out.println("-----MotorPH-----");
+//        System.out.println("1. Search Employee");
+//        System.out.println("2. Calculate Salary");
+//        System.out.println("3. Exit Program");
+//        System.out.print("Enter Choice: ");
+//    }
+//
+//    public static void options(String option) {
+//        switch (option) {
+//            case "1":
+//                System.out.print("Enter Employee Number: ");
+//                String empNum = scan.nextLine();
+//                try {
+//                    int employeeNumber = Integer.parseInt(empNum);
+//                    listOfEmployees(employeeNumber);
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid employee number format. Please enter a valid number.");
+//                }
+//                break;
+//
+//            case "2":
+//                System.out.print("Enter Employee Number: ");
+//                String empNumSalary = scan.nextLine();
+//                try {
+//                    int employeeNumber = Integer.parseInt(empNumSalary);
+//                    calculateSalary(employeeNumber);
+//                } catch (NumberFormatException e) {
+//                    System.out.println("Invalid employee number format. Please enter a valid number.");
+//                }
+//                break;
+//
+//            case "3":
+//                System.out.println("Closing Program...");
+//                loop = false;
+//                break;
+//
+//            default:
+//                System.out.println("Invalid Input Try again!");
+//                break;
+//        }
+//    }
 
     public static void listOfEmployees(int searchEmployeeNumber) {
         Employee[] employeeList = employeeDataFromFile.getEmployeeData();

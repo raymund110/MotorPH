@@ -1,0 +1,78 @@
+package com.motorph;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
+
+public class frameLogin extends JFrame {
+    private JPanel panelLogin;
+    private JLabel lblHeader;
+    private JLabel lblEmpNum;
+    private JTextField txtEmpNum;
+    private JPasswordField password;
+    private JLabel lblPassword;
+    private JButton btnLogin;
+
+    public frameLogin() {
+        this.setContentPane(this.panelLogin);
+        this.setSize(450, 350);
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("MotorPH Employee Login");
+
+        btnLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String empNum = txtEmpNum.getText().trim();
+                String empPass = new String(password.getPassword()).trim();
+                
+                try {
+                    File file = new File("Sheet1.csv");
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    String line;
+                    boolean found = false;
+                    
+                    // Skip header line if it exists
+                    reader.readLine();
+                    
+                    while ((line = reader.readLine()) != null) {
+                        String[] parts = line.split(",");
+                        if (parts.length >= 2) {
+                            String fileEmpNum = parts[0].trim();
+                            String fileEmpPass = parts[1].trim();
+                            
+                            if (empNum.equals(fileEmpNum) && empPass.equals(fileEmpPass)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                    reader.close();
+                    
+                    if (found) {
+                        new employeeFrame();
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(frameLogin.this,
+                                "Invalid Credentials",
+                                "Login Error",
+                                JOptionPane.ERROR_MESSAGE);
+                        txtEmpNum.setText("");
+                        password.setText("");
+                        txtEmpNum.requestFocus();
+                    }
+                    
+                } catch (IOException ex) {
+                    System.out.println("Error reading Sheet1.csv: " + ex.getMessage());
+                    ex.printStackTrace(); // This will print the full error trace to the console
+                    JOptionPane.showMessageDialog(frameLogin.this,
+                            "Error reading credentials file: " + ex.getMessage(),
+                            "File Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
+}

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EmployeeDataFromFile {
-    private Employee[] employees;
+    private final Employee[] employees;
 
     public EmployeeDataFromFile() {
         String employeeData = "src/main/resources/MotorPH Employee Data.csv";

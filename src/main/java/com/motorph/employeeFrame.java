@@ -1,17 +1,15 @@
 package com.motorph;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class employeeFrame extends JFrame {
 
     private JPanel empDashboard;
-    private JTextArea txtAttendance;
-    private JTextField textField1;
+    private JPanel empInfo;
+    private JPanel govID;
+    private JTextField txtSearchAttendance;
     private JLabel lblEmployeeNumber;
     private JLabel lblName;
     private JLabel lblStatus;
@@ -25,6 +23,8 @@ public class employeeFrame extends JFrame {
     private JLabel lblTin;
     private JLabel lblPagibig;
     private JButton btnLogout;
+    private JTable tableRecords;
+    private JButton btnSearchAttendance;
 
     public employeeFrame(String loggedInEmployeeNumber) {
         EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
@@ -41,12 +41,12 @@ public class employeeFrame extends JFrame {
 
         this.setContentPane(this.empDashboard);
         this.setTitle("MotorPH Employee Dashboard");
-        this.setSize(750,500);
+        this.setSize(850,550);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Set the text fields if employee is found
+        // Set the text fields if an employee is found
         if (loggedInEmployee != null) {
             lblEmployeeNumber.setText(String.valueOf(loggedInEmployee.getEmployeeNumber()));
             lblName.setText(loggedInEmployee.getPerson().getFirstName() + " " +
@@ -83,5 +83,6 @@ public class employeeFrame extends JFrame {
 
             }
         });
+
     }
 }

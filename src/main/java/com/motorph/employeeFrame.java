@@ -1,16 +1,15 @@
 package com.motorph;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class employeeFrame extends JFrame {
 
     private JPanel empDashboard;
-    private JTextField textField1;
+    private JPanel empInfo;
+    private JPanel govID;
+    private JTextField txtSearchAttendance;
     private JLabel lblEmployeeNumber;
     private JLabel lblName;
     private JLabel lblStatus;
@@ -24,6 +23,12 @@ public class employeeFrame extends JFrame {
     private JLabel lblTin;
     private JLabel lblPagibig;
     private JButton btnLogout;
+    private JTable tableRecords;
+    private JButton btnSearchAttendance;
+    private JLabel lblBasicSalary;
+    private JLabel lblRiceSubsidy;
+    private JLabel lblPhoneAllowance;
+    private JLabel lblClothingAllowance;
 
     public employeeFrame(String loggedInEmployeeNumber) {
         EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
@@ -40,12 +45,16 @@ public class employeeFrame extends JFrame {
 
         this.setContentPane(this.empDashboard);
         this.setTitle("MotorPH Employee Dashboard");
-        this.setSize(750,500);
+        this.setSize(1150,650);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Set the text fields if employee is found
+        // Logo Config
+        ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
+        this.setIconImage(logo.getImage());
+
+        // Set the text fields if an employee is found
         if (loggedInEmployee != null) {
             lblEmployeeNumber.setText(String.valueOf(loggedInEmployee.getEmployeeNumber()));
             lblName.setText(loggedInEmployee.getPerson().getFirstName() + " " +
@@ -65,10 +74,17 @@ public class employeeFrame extends JFrame {
             lblTin.setText(loggedInEmployee.getGovID().gettinID());
             lblPagibig.setText(loggedInEmployee.getGovID().getpagibigID());
 
+            //Payroll
+            lblBasicSalary.setText(String.valueOf(loggedInEmployee.getCompensation().getBasicSalary()));
+            lblRiceSubsidy.setText(String.valueOf(loggedInEmployee.getCompensation().getRiceSubsidy()));
+            lblPhoneAllowance.setText(String.valueOf(loggedInEmployee.getCompensation().getPhoneAllowance()));
+            lblClothingAllowance.setText(String.valueOf(loggedInEmployee.getCompensation().getClothingAllowance()));
+
         }
 
         this.setVisible(true);
 
+        // Action listener for the LogOut button
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,5 +98,6 @@ public class employeeFrame extends JFrame {
 
             }
         });
+
     }
 }

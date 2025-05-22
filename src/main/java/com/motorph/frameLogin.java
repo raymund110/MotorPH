@@ -15,6 +15,7 @@ public class frameLogin extends JFrame {
     private JButton btnLogin;
 
     public frameLogin() {
+        // Window Configurations
         this.setContentPane(this.panelLogin);
         this.setSize(450, 350);
         this.setVisible(true);
@@ -23,6 +24,11 @@ public class frameLogin extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("MotorPH Employee Login");
 
+        // Logo Config
+        ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
+        this.setIconImage(logo.getImage());
+
+        // Action listener for the LogIn button
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -49,6 +55,7 @@ public class frameLogin extends JFrame {
                     }
 
                     if (correct) {
+                        // Open the employee dashboard window if there is no error in employee number input
                         new employeeFrame(empNum);
                         dispose(); // Close the login window
                     } else {

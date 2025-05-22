@@ -25,6 +25,10 @@ public class employeeFrame extends JFrame {
     private JButton btnLogout;
     private JTable tableRecords;
     private JButton btnSearchAttendance;
+    private JLabel lblBasicSalary;
+    private JLabel lblRiceSubsidy;
+    private JLabel lblPhoneAllowance;
+    private JLabel lblClothingAllowance;
 
     public employeeFrame(String loggedInEmployeeNumber) {
         EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
@@ -41,10 +45,14 @@ public class employeeFrame extends JFrame {
 
         this.setContentPane(this.empDashboard);
         this.setTitle("MotorPH Employee Dashboard");
-        this.setSize(850,550);
+        this.setSize(1150,650);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Logo Config
+        ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
+        this.setIconImage(logo.getImage());
 
         // Set the text fields if an employee is found
         if (loggedInEmployee != null) {
@@ -66,10 +74,17 @@ public class employeeFrame extends JFrame {
             lblTin.setText(loggedInEmployee.getGovID().gettinID());
             lblPagibig.setText(loggedInEmployee.getGovID().getpagibigID());
 
+            //Payroll
+            lblBasicSalary.setText(String.valueOf(loggedInEmployee.getCompensation().getBasicSalary()));
+            lblRiceSubsidy.setText(String.valueOf(loggedInEmployee.getCompensation().getRiceSubsidy()));
+            lblPhoneAllowance.setText(String.valueOf(loggedInEmployee.getCompensation().getPhoneAllowance()));
+            lblClothingAllowance.setText(String.valueOf(loggedInEmployee.getCompensation().getClothingAllowance()));
+
         }
 
         this.setVisible(true);
 
+        // Action listener for the LogOut button
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

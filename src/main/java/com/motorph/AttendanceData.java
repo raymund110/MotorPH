@@ -1,12 +1,10 @@
 package com.motorph;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 // This class was made to refactor the AttendanceDataFromFile
 public class AttendanceData {
@@ -70,7 +68,12 @@ public class AttendanceData {
         return attendance;
     }
 
-    public double calculateHoursWorked () {
+    public double calculateDailyWorkHours () {
+        double dailyHours = 0.0;
+        return dailyHours;
+    }
+
+    public double calculateWorkHours () {
         double workHours = 0.0;
         return workHours;
     }

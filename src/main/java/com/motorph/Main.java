@@ -4,16 +4,12 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static EmployeeDataFromFile employeeDataFromFile = new EmployeeDataFromFile();
-    public static SalaryDeduction salaryDeduction = new SalaryDeduction();
     public static AttendanceData attendanceData = new AttendanceData();
-
-    static Scanner scan = new Scanner(System.in);
-    static boolean loop = true;
 
     public static void main(String[] args) {
 //        new frameLogin();
         new employeeFrame("10034");
+//        new employeeFrame("10003");
         listAttendance(10034);
     }
 

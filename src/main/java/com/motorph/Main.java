@@ -13,6 +13,7 @@ public class Main {
         listAttendance(10034);
     }
 
+    // Testing AttendanceData if reading csv properly
     public static void listAttendance(int searchEmployee) {
         Attendance[] attendancesList = attendanceData.getAttendanceData();
         boolean found = false;

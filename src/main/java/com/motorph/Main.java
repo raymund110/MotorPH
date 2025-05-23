@@ -1,7 +1,5 @@
 package com.motorph;
 
-import java.util.Scanner;
-
 public class Main {
 
     public static AttendanceData attendanceData = new AttendanceData();
@@ -9,32 +7,8 @@ public class Main {
     public static void main(String[] args) {
 //        new frameLogin();
         new employeeFrame("10034");
-//        new employeeFrame("10003");
-        listAttendance(10034);
     }
 
-    public static void listAttendance(int searchEmployee) {
-        Attendance[] attendancesList = attendanceData.getAttendanceData();
-        boolean found = false;
-
-        for (Attendance att : attendancesList) {
-            if(att != null && att.getEmployee().getEmployeeNumber() == searchEmployee){
-                System.out.print("Employee Number: " + att.getEmployee().getEmployeeNumber()
-                + "\nEmployee Name: " + att.getEmployee().getPerson().getFirstName() + " "
-                + att.getEmployee().getPerson().getLastName()
-                + "\nDate: " + att.getAttendanceDate()
-                + "\nTime In: " + att.getTimeIn()
-                + "\nTime Out: " + att.getTimeout());
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            System.out.println("Employee Not Found: " + searchEmployee);
-        }
-
-    }
 
 // Comment out calculateSalary
 //    public static void calculateSalary(int searchEmployeeNumber) {

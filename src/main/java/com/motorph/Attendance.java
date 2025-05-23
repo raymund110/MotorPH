@@ -37,7 +37,7 @@ public class Attendance {
         this.timeIn = timeIn;
     }
 
-    public LocalTime getTimeout() {
+    public LocalTime getTimeOut() {
         return timeOut;
     }
 

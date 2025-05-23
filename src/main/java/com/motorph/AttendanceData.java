@@ -5,32 +5,26 @@ import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 // This class was made to refactor the AttendanceDataFromFile
 public class AttendanceData {
-    private final Attendance[] attendance;
+    private final ArrayList<Attendance> attendance = new ArrayList<>();
 
     public AttendanceData() {
         String attendanceData = "src/main/resources/Attendance Record.csv";
-        attendance = new Attendance[50];
         dataFromFile(attendanceData);
     }
 
-    public Attendance[] getAttendanceData() { return attendance; }
+    public ArrayList<Attendance> getAttendanceData() { return attendance; }
 
     public void dataFromFile(String attendanceData) {
         try (BufferedReader reader = new BufferedReader(new FileReader(attendanceData))){
             reader.readLine(); //
             String line;
-            int counter = 0;
 
-            while ((line = reader.readLine()) != null && counter < attendance.length) {
-                String[] values = line.split(",");
-                if (values.length >= 6) { // 6 columns in the CSV file
-                    attendance[counter] = createAttendance(values);
-                    counter++;
-                }
-
+            while ((line = reader.readLine()) != null) {
+                    attendance.add(createAttendance(line));
             }
 
         } catch (Exception e) {
@@ -38,16 +32,17 @@ public class AttendanceData {
         }
     }
 
-    private Attendance createAttendance (String[] values) {
+    private Attendance createAttendance (String lines) {
         Attendance attendance = new Attendance();
         Person person = new Person();
 
         try {
+            String[] values = lines.split(",");
             attendance.getEmployee().setEmployeeNumber(Integer.parseInt(values[0].trim()));
 
             attendance.getEmployee().setPerson(person);
-            person.setFirstName(values[1].trim());
-            person.setLastName(values[2].trim());
+            person.setLastName(values[1].trim());
+            person.setFirstName(values[2].trim());
 
             // Format date to match the csv file format
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");

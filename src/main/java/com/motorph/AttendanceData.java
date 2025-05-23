@@ -63,11 +63,13 @@ public class AttendanceData {
         return attendance;
     }
 
+    // Not Done
     public double calculateDailyWorkHours () {
         double dailyHours = 0.0;
         return dailyHours;
     }
 
+    // Not Done
     public double calculateWorkHours () {
         double workHours = 0.0;
         return workHours;

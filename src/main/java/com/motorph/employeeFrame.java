@@ -3,14 +3,11 @@ package com.motorph;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class employeeFrame extends JFrame {
 
     private JPanel empDashboard;
-    private JTextField txtSearchAttendance;
     private JLabel lblEmployeeNumber;
     private JLabel lblName;
     private JLabel lblStatus;
@@ -23,14 +20,12 @@ public class employeeFrame extends JFrame {
     private JLabel lblPhilhealth;
     private JLabel lblTin;
     private JLabel lblPagibig;
-    private JButton btnLogout;
-    private JButton btnSearchAttendance;
     private JLabel lblBasicSalary;
     private JLabel lblRiceSubsidy;
     private JLabel lblPhoneAllowance;
     private JLabel lblClothingAllowance;
     private JTable tableAttendanceRecords;
-    private JButton btnRefresh;
+    private JTextField txtSearchEmployee;
 
     // Attendance
     AttendanceData attendanceData = new AttendanceData();
@@ -40,7 +35,7 @@ public class employeeFrame extends JFrame {
 
         this.setContentPane(this.empDashboard);
         this.setTitle("MotorPH Employee Dashboard");
-        this.setSize(1230,600);
+        this.setSize(1230,650);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,63 +47,6 @@ public class employeeFrame extends JFrame {
         employeeInfo(loggedInEmployeeNumber);
 
         this.setVisible(true);
-
-        // Search Attendance Record Button (NOT WORKING)
-        btnSearchAttendance.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String searchDate = txtSearchAttendance.getText().trim();
-
-                String[] columnNames = {"Name", "Date", "Time In", "Time Out"};
-                DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
-                    @Override
-                    public boolean isCellEditable(int row, int column) {
-                        return false;
-                    }
-                };
-
-                for (Attendance att : attendancesList) {
-                    if (att != null && String.valueOf(att.getEmployee().getEmployeeNumber()).equals(loggedInEmployeeNumber)) {
-                        if (searchDate.isEmpty() || att.getAttendanceDate().toString().equals(searchDate)) {
-                            Object[] row = new Object[]{
-                                    att.getEmployee().getPerson().getFirstName() + " " + att.getEmployee().getPerson().getLastName(),
-                                    att.getAttendanceDate(),
-                                    att.getTimeIn(),
-                                    att.getTimeOut()
-                            };
-                            model.addRow(row);
-                        }
-                    }
-                }
-            }
-        });
-
-
-        // Button to refresh the tableAttendanceRecords
-        btnRefresh.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                attendanceTable(loggedInEmployeeNumber);
-                txtSearchAttendance.setText("");
-            }
-        });
-
-
-        // Action listener for the LogOut button
-        btnLogout.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                int result = JOptionPane.showConfirmDialog(employeeFrame.this, "Are you sure you want to logout?",
-                        "Confirmation", JOptionPane.YES_NO_OPTION);
-
-                if (result == JOptionPane.YES_OPTION) {
-                    new frameLogin();
-                    dispose();
-                }
-
-            }
-        });
 
     }
 

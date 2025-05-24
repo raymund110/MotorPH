@@ -12,6 +12,7 @@ public class Employee {
     private ContactInfo contactInfo;
     private GovernmentID govID;
     private Job job;
+    private Salary salary;
 
     public Employee() {
         this.person = new Person();
@@ -19,6 +20,7 @@ public class Employee {
         this.govID = new GovernmentID();
         this.job = new Job();
         this.compensation = new Compensation();
+        this.salary = new Salary();
     }
 
     public int getEmployeeNumber() {
@@ -84,5 +86,9 @@ public class Employee {
     public void setJob(Job job) {
         this.job = job;
     }
+
+    public Salary getSalary () { return salary; }
+
+    public void setSalary (Salary salary) { this.salary = salary; }
 
 }

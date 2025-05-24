@@ -4,17 +4,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class EmployeeDataFromFile {
-    private final Employee[] employees;
+    private final ArrayList<Employee> employees = new ArrayList<>();
 
     public EmployeeDataFromFile() {
         String employeeData = "src/main/resources/MotorPH Employee Data.csv";
-        employees = new Employee[50];
+//        employees = new Employee[50];
         dataFromFile(employeeData);
     }
 
-    public Employee[] getEmployeeData() {
+    public ArrayList<Employee> getEmployeeData() {
         return employees;
     }
 
@@ -22,22 +23,16 @@ public class EmployeeDataFromFile {
         try (BufferedReader reader = new BufferedReader(new FileReader(employeeData))) {
             reader.readLine(); // Skip header
             String line;
-            int counter = 0;
 
-            while ((line = reader.readLine()) != null && counter < employees.length) {
-                // Split by comma but respect quotes
-                String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-                if (values.length >= 19) {
-                    employees[counter] = createEmployee(values);
-                    counter++;
-                }
+            while ((line = reader.readLine()) != null) {
+                employees.add(createEmployee(line));
             }
         } catch (Exception e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
     }
 
-    private Employee createEmployee(String[] values) {
+    private Employee createEmployee(String lines) {
         Employee employee = new Employee();
         Compensation compensation = new Compensation();
         ContactInfo contactInfo = new ContactInfo();
@@ -46,14 +41,17 @@ public class EmployeeDataFromFile {
         Job job = new Job();
 
         try {
+            // Split by comma but respect quotes
+            String[] values = lines.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
             employee.setEmployeeNumber(Integer.parseInt(values[0].trim()));
             // Basic employee info
             employee.setPerson(person);
             person.setLastName(values[1].trim());
             person.setFirstName(values[2].trim());
 
-            DateTimeFormatter birtdayFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            employee.setBirthday(LocalDate.parse(values[3].trim(), birtdayFormat));
+            DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            employee.setBirthday(LocalDate.parse(values[3].trim(), birthdayFormat));
 
             // Contacts
             employee.setContactInfo(contactInfo); // initialize

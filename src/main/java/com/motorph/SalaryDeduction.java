@@ -40,7 +40,7 @@ public class SalaryDeduction {
         return salary * 0.05;
     }
 
-    public double totalSalaryDeductions(double salary) {
+    public double getTotalSalaryDeductions(double salary) {
         this.salary = salary;
         return sssdeduction() + pagibigDeduction() + philHealthDeduction() + withholdingTax();
     }

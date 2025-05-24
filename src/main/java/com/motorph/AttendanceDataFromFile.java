@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 // This class was made to refactor the AttendanceDataFromFile
-public class AttendanceData {
+public class AttendanceDataFromFile {
     private final ArrayList<Attendance> attendance = new ArrayList<>();
 
-    public AttendanceData() {
+    public AttendanceDataFromFile() {
         String attendanceData = "src/main/resources/Attendance Record.csv";
         dataFromFile(attendanceData);
     }

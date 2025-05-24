@@ -1,8 +1,8 @@
 package com.motorph;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class employeeFrame extends JFrame {
@@ -24,18 +24,16 @@ public class employeeFrame extends JFrame {
     private JLabel lblRiceSubsidy;
     private JLabel lblPhoneAllowance;
     private JLabel lblClothingAllowance;
-    private JTable tableAttendanceRecords;
     private JTextField txtSearchEmployee;
+    private JLabel lblMonthlyGross;
+    private JLabel lblWeeklyGross;
+    private JLabel lblWeeklyNet;
 
-    // Attendance
-    AttendanceData attendanceData = new AttendanceData();
-    ArrayList<Attendance> attendancesList = attendanceData.getAttendanceData();
-
-    public employeeFrame(String loggedInEmployeeNumber) {
-
+    public employeeFrame() {
+        // Window Configuration
         this.setContentPane(this.empDashboard);
         this.setTitle("MotorPH Employee Dashboard");
-        this.setSize(1230,650);
+        this.setSize(750,700);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,10 +42,36 @@ public class employeeFrame extends JFrame {
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
         this.setIconImage(logo.getImage());
 
-        employeeInfo(loggedInEmployeeNumber);
-
         this.setVisible(true);
 
+        txtSearchEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String search = txtSearchEmployee.getText().trim();
+
+                try {
+                    // Parse String to int to determine employee number range
+                    int employeeNumber = Integer.parseInt(search);
+
+                    if (employeeNumber >= 10001 && employeeNumber <= 10034) {
+                        // if entered employee number is inside range
+                        employeeInfo(search);
+                    }
+
+                    else {
+                        // if entered employee number is out of range
+                        JOptionPane.showMessageDialog(employeeFrame.this,
+                                "Employee Number Does Not Exist!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (NumberFormatException ex) {
+                    // Invalid input error handler
+                    JOptionPane.showMessageDialog(employeeFrame.this,
+                            "Please enter a valid employee Number", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+        });
     }
 
     // Method to load employee info to the labels and text fields
@@ -89,15 +113,57 @@ public class employeeFrame extends JFrame {
             lblPagibig.setText(loggedInEmployee.getGovID().getpagibigID());
 
             //Payroll
-            lblBasicSalary.setText(String.valueOf(loggedInEmployee.getCompensation().getBasicSalary()));
-            lblRiceSubsidy.setText(String.valueOf(loggedInEmployee.getCompensation().getRiceSubsidy()));
-            lblPhoneAllowance.setText(String.valueOf(loggedInEmployee.getCompensation().getPhoneAllowance()));
-            lblClothingAllowance.setText(String.valueOf(loggedInEmployee.getCompensation().getClothingAllowance()));
+            lblBasicSalary.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getBasicSalary()));
+            lblRiceSubsidy.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getRiceSubsidy()));
+            lblPhoneAllowance.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getPhoneAllowance()));
+            lblClothingAllowance.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getClothingAllowance()));
 
-            attendanceTable(loggedInEmployeeNumber);
+            employeeSalary(loggedInEmployeeNumber);
         }
     }
 
+    private void employeeSalary (String loggedInEmployeeNumber) {
+        // Employee Info
+        EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
+        ArrayList<Employee> employees = dataFile.getEmployeeData();
+
+        SalaryDeduction deduction = new SalaryDeduction();
+
+        // Find the logged employee from the frameLogin class using the parameters of this constructor
+        Employee loggedInEmployee = null;
+
+        for (Employee emp : employees) {
+            if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(loggedInEmployeeNumber)) {
+                loggedInEmployee = emp;
+                break;
+            }
+        }
+
+        if (loggedInEmployee != null) {
+            double monthlyGross = loggedInEmployee.getCompensation().getBasicSalary()
+                    + loggedInEmployee.getCompensation().getRiceSubsidy()
+                    + loggedInEmployee.getCompensation().getPhoneAllowance()
+                    + loggedInEmployee.getCompensation().getClothingAllowance();
+
+            // Setting salary values
+            loggedInEmployee.getSalary().setMonthlyGross(monthlyGross);
+            loggedInEmployee.getSalary().setWeeklyGross(monthlyGross / 4);
+            loggedInEmployee.getSalary().setWeeklyNet(loggedInEmployee.getSalary().getWeeklyGross()
+            - deduction.getTotalSalaryDeductions(loggedInEmployee.getCompensation().getBasicSalary()) / 4);
+
+            // Setting lbl texts
+            lblMonthlyGross.setText("₱ " + String.valueOf(loggedInEmployee.getSalary().getMonthlyGross()));
+            lblWeeklyGross.setText("₱ " + String.valueOf(loggedInEmployee.getSalary().getWeeklyGross()));
+            lblWeeklyNet.setText("₱ " + String.valueOf(loggedInEmployee.getSalary().getWeeklyNet()));
+
+        }
+
+
+    }
+
+    // Comment out the added feature
+    // Saving it just in case
+    /*
     // Method to load the attendance records in the tableAttendanceRecords
     private void attendanceTable (String loggedInEmployeeNumber) {
         // Column Names
@@ -135,5 +201,6 @@ public class employeeFrame extends JFrame {
         tableAttendanceRecords.getColumnModel().getColumn(2).setPreferredWidth(100); // Time In column
         tableAttendanceRecords.getColumnModel().getColumn(3).setPreferredWidth(100); // Time Out column
     }
+     */
 
 }

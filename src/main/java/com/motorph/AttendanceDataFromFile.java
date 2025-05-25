@@ -7,7 +7,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-// This class was made to refactor the AttendanceDataFromFile
+// Not used because it is an additional feature NOT in the console app
+
 public class AttendanceDataFromFile {
     private final ArrayList<Attendance> attendance = new ArrayList<>();
 
@@ -16,26 +17,32 @@ public class AttendanceDataFromFile {
         dataFromFile(attendanceData);
     }
 
+    // Getter method that returns attendance ArrayList that contains all attendance objects
     public ArrayList<Attendance> getAttendanceData() { return attendance; }
 
+    // Method that reads the CSV file of attendance data
     public void dataFromFile(String attendanceData) {
         try (BufferedReader reader = new BufferedReader(new FileReader(attendanceData))){
-            reader.readLine(); //
+            reader.readLine(); // Skip header
             String line;
 
+            // Read the csv file line by line
             while ((line = reader.readLine()) != null) {
-                    attendance.add(createAttendance(line));
+                    attendance.add(createAttendance(line)); // Add attendance objects to attendance ArrayList
             }
 
-        } catch (Exception e) {
+        } catch (Exception e) { // Handle reading file errors
             System.out.println("Error reading file: " + e.getMessage());
         }
     }
 
+    // Converts single lines of CSV data into an attendance Objects
     private Attendance createAttendance (String lines) {
+        // Instantiate employee-related class
         Attendance attendance = new Attendance();
         Person person = new Person();
 
+        // Parse and set all attendance attributes
         try {
             String[] values = lines.split(",");
             attendance.getEmployee().setEmployeeNumber(Integer.parseInt(values[0].trim()));
@@ -55,7 +62,7 @@ public class AttendanceDataFromFile {
             attendance.setTimeIn(LocalTime.parse(values[4].trim(), timeFormatter));
             attendance.setTimeOut(LocalTime.parse(values[5].trim(), timeFormatter));
 
-        } catch (Exception e) {
+        } catch (Exception e) { // Handles parsing errors
             System.out.println("Error parsing date: " + e.getMessage());
             throw new RuntimeException(e);
         }
@@ -63,6 +70,7 @@ public class AttendanceDataFromFile {
         return attendance;
     }
 
+    /*
     // Not Done
     public double calculateDailyWorkHours () {
         double dailyHours = 0.0;
@@ -73,6 +81,6 @@ public class AttendanceDataFromFile {
     public double calculateWorkHours () {
         double workHours = 0.0;
         return workHours;
-    }
+    }*/
 
 }

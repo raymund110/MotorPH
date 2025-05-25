@@ -11,28 +11,32 @@ public class EmployeeDataFromFile {
 
     public EmployeeDataFromFile() {
         String employeeData = "src/main/resources/MotorPH Employee Data.csv";
-//        employees = new Employee[50];
         dataFromFile(employeeData);
     }
 
+    // Getter method that returns employees ArrayList that contains all employee objects
     public ArrayList<Employee> getEmployeeData() {
         return employees;
     }
 
+    // Method that reads the CSV file of employee data
     public void dataFromFile(String employeeData) {
         try (BufferedReader reader = new BufferedReader(new FileReader(employeeData))) {
             reader.readLine(); // Skip header
             String line;
 
+            // Read the csv file line by line
             while ((line = reader.readLine()) != null) {
-                employees.add(createEmployee(line));
+                employees.add(createEmployee(line)); // Add employee objects to employees ArrayList
             }
-        } catch (Exception e) {
+        } catch (Exception e) { // Handle reading file errors
             System.out.println("Error reading file: " + e.getMessage());
         }
     }
 
+    // Converts single lines of CSV data into an Employee Objects
     private Employee createEmployee(String lines) {
+        // Instantiate employee-related class
         Employee employee = new Employee();
         Compensation compensation = new Compensation();
         ContactInfo contactInfo = new ContactInfo();
@@ -40,6 +44,7 @@ public class EmployeeDataFromFile {
         GovernmentID govID = new GovernmentID();
         Job job = new Job();
 
+        // Parse and set all employee attributes
         try {
             // Split by comma but respect quotes
             String[] values = lines.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
@@ -50,11 +55,12 @@ public class EmployeeDataFromFile {
             person.setLastName(values[1].trim());
             person.setFirstName(values[2].trim());
 
+            // Format data
             DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             employee.setBirthday(LocalDate.parse(values[3].trim(), birthdayFormat));
 
             // Contacts
-            employee.setContactInfo(contactInfo); // initialize
+            employee.setContactInfo(contactInfo);
             contactInfo.setAddress(values[4].trim());
             contactInfo.setPhoneNumber(values[5].trim());
 
@@ -73,6 +79,7 @@ public class EmployeeDataFromFile {
             job.setSupervisor(values[12].trim());
 
             // Parse salary and allowances
+            // Remove additional "" quotation marks to all double data types
             String basicSalary = values[13].replace(",", "").replace("\"", "").trim();
             String riceSubsidy = values[14].replace(",", "").replace("\"", "").trim();
             String phoneAllowance = values[15].replace(",", "").replace("\"", "").trim();
@@ -80,16 +87,15 @@ public class EmployeeDataFromFile {
             String hourlyRate = values[18].replace(",", "").replace("\"", "").trim();
 
             // Compensation
-            employee.setCompensation(compensation); // initialize
+            employee.setCompensation(compensation);
             compensation.setBasicSalary(Double.parseDouble(basicSalary));
             compensation.setRiceSubsidy(Double.parseDouble(riceSubsidy));
             compensation.setPhoneAllowance(Double.parseDouble(phoneAllowance));
             compensation.setClothingAllowance(Double.parseDouble(clothingAllowance));
-
             compensation.setHourlyRate(Double.parseDouble(hourlyRate));
         }
 
-        catch (Exception e) {
+        catch (Exception e) { // Handle parsing errors
             System.out.println("Error creating employee: " + e.getMessage());
         }
         return employee;

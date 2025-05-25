@@ -28,6 +28,7 @@ public class employeeFrame extends JFrame {
     private JLabel lblMonthlyGross;
     private JLabel lblWeeklyGross;
     private JLabel lblWeeklyNet;
+    private JLabel lblHourlyRate;
 
     public employeeFrame() {
         // Window Configuration
@@ -42,17 +43,20 @@ public class employeeFrame extends JFrame {
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
         this.setIconImage(logo.getImage());
 
-        this.setVisible(true);
+        this.setVisible(true); // Set employeeFrame visible
 
+        // Action listener for the search employee text field when press enters
         txtSearchEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String search = txtSearchEmployee.getText().trim();
+                txtSearchEmployee.setText(""); // to clear the text field after
 
                 try {
                     // Parse String to int to determine employee number range
                     int employeeNumber = Integer.parseInt(search);
 
+                    // Range of employee numbers based on the csv file
                     if (employeeNumber >= 10001 && employeeNumber <= 10034) {
                         // if entered employee number is inside range
                         employeeInfo(search);
@@ -62,12 +66,14 @@ public class employeeFrame extends JFrame {
                         // if entered employee number is out of range
                         JOptionPane.showMessageDialog(employeeFrame.this,
                                 "Employee Number Does Not Exist!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                        txtSearchEmployee.setText(""); // to clear the text field after error inputs
                     }
 
                 } catch (NumberFormatException ex) {
-                    // Invalid input error handler
+                    // Invalid input error handler // if entered input is not a number
                     JOptionPane.showMessageDialog(employeeFrame.this,
                             "Please enter a valid employee Number", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    txtSearchEmployee.setText(""); // to clear the text field after error inputs
                 }
 
             }
@@ -112,16 +118,18 @@ public class employeeFrame extends JFrame {
             lblTin.setText(loggedInEmployee.getGovID().gettinID());
             lblPagibig.setText(loggedInEmployee.getGovID().getpagibigID());
 
-            //Payroll
+            // Compensation
             lblBasicSalary.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getBasicSalary()));
             lblRiceSubsidy.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getRiceSubsidy()));
             lblPhoneAllowance.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getPhoneAllowance()));
             lblClothingAllowance.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getClothingAllowance()));
+            lblHourlyRate.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getHourlyRate()));
 
             employeeSalary(loggedInEmployeeNumber);
         }
     }
 
+    // Method to set the salary fields
     private void employeeSalary (String loggedInEmployeeNumber) {
         // Employee Info
         EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
@@ -161,7 +169,7 @@ public class employeeFrame extends JFrame {
 
     }
 
-    // Comment out the added feature
+    // Comment this out because this is an additional feature NOT from the console app
     // Saving it just in case
     /*
     // Method to load the attendance records in the tableAttendanceRecords

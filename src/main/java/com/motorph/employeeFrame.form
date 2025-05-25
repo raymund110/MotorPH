@@ -315,7 +315,7 @@
           </component>
         </children>
       </grid>
-      <grid id="86d47" layout-manager="GridLayoutManager" row-count="12" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="86d47" layout-manager="GridLayoutManager" row-count="13" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
           <grid row="1" column="1" row-span="5" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -377,9 +377,18 @@
               <text value="Clothing Allowance:"/>
             </properties>
           </component>
-          <component id="67abe" class="javax.swing.JLabel">
+          <component id="e327e" class="javax.swing.JLabel">
             <constraints>
               <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="JetBrains Mono" size="14" style="1"/>
+              <text value="Hourly Rate:"/>
+            </properties>
+          </component>
+          <component id="67abe" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="1"/>
@@ -388,7 +397,7 @@
           </component>
           <component id="39c5b" class="javax.swing.JLabel">
             <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="1"/>
@@ -397,7 +406,7 @@
           </component>
           <component id="3b2be" class="javax.swing.JLabel">
             <constraints>
-              <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="1"/>
@@ -406,7 +415,7 @@
           </component>
           <component id="af2fc" class="javax.swing.JLabel">
             <constraints>
-              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="1"/>
@@ -419,7 +428,7 @@
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="0"/>
-              <text value="*****"/>
+              <text value="******"/>
             </properties>
           </component>
           <component id="a378b" class="javax.swing.JLabel" binding="lblRiceSubsidy">
@@ -428,7 +437,7 @@
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="0"/>
-              <text value="****"/>
+              <text value="******"/>
             </properties>
           </component>
           <component id="d936a" class="javax.swing.JLabel" binding="lblPhoneAllowance">
@@ -437,7 +446,7 @@
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="0"/>
-              <text value="****"/>
+              <text value="******"/>
             </properties>
           </component>
           <component id="91e39" class="javax.swing.JLabel" binding="lblClothingAllowance">
@@ -446,34 +455,43 @@
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="0"/>
-              <text value="****"/>
+              <text value="******"/>
             </properties>
           </component>
-          <component id="faf6" class="javax.swing.JLabel" binding="lblMonthlyGross">
+          <component id="6284c" class="javax.swing.JLabel" binding="lblHourlyRate">
             <constraints>
-              <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="0"/>
-              <text value="****"/>
+              <text value="******"/>
             </properties>
           </component>
-          <component id="212f3" class="javax.swing.JLabel" binding="lblWeeklyGross">
+          <component id="faf6" class="javax.swing.JLabel" binding="lblMonthlyGross">
             <constraints>
               <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="0"/>
-              <text value="****"/>
+              <text value="******"/>
             </properties>
           </component>
-          <component id="b5383" class="javax.swing.JLabel" binding="lblWeeklyNet">
+          <component id="212f3" class="javax.swing.JLabel" binding="lblWeeklyGross">
             <constraints>
               <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="JetBrains Mono" size="14" style="0"/>
-              <text value="****"/>
+              <text value="******"/>
+            </properties>
+          </component>
+          <component id="b5383" class="javax.swing.JLabel" binding="lblWeeklyNet">
+            <constraints>
+              <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="JetBrains Mono" size="14" style="0"/>
+              <text value="******"/>
             </properties>
           </component>
           <component id="30d4b" class="javax.swing.JLabel">
@@ -487,7 +505,7 @@
           </component>
           <vspacer id="ee039">
             <constraints>
-              <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
         </children>

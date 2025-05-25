@@ -6,7 +6,6 @@ public class Main {
         new employeeFrame();
     }
 
-
       //Comment out calculateSalary
     /*
     public static void calculateSalary(int searchEmployeeNumber) {

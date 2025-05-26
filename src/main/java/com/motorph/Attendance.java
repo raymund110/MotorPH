@@ -5,6 +5,9 @@ import java.time.LocalTime;
 
 public class Attendance {
 
+    // Not used because it is an additional feature NOT in the console app
+
+    // Attendance Attributes
     private Employee employee;
     private LocalDate attendanceDate;
     private LocalTime timeIn, timeOut;

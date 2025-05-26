@@ -28,6 +28,7 @@ public class employeeFrame extends JFrame {
     private JLabel lblMonthlyGross;
     private JLabel lblWeeklyGross;
     private JLabel lblWeeklyNet;
+    private JLabel lblHourlyRate;
 
     public employeeFrame() {
         // Window Configuration
@@ -42,17 +43,20 @@ public class employeeFrame extends JFrame {
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
         this.setIconImage(logo.getImage());
 
-        this.setVisible(true);
+        this.setVisible(true); // Set employeeFrame visible
 
+        // Action listener for the search employee text field when press enters
         txtSearchEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String search = txtSearchEmployee.getText().trim();
+                txtSearchEmployee.setText(""); // to clear the text field after
 
                 try {
                     // Parse String to int to determine employee number range
                     int employeeNumber = Integer.parseInt(search);
 
+                    // Range of employee numbers based on the csv file
                     if (employeeNumber >= 10001 && employeeNumber <= 10034) {
                         // if entered employee number is inside range
                         employeeInfo(search);
@@ -62,106 +66,113 @@ public class employeeFrame extends JFrame {
                         // if entered employee number is out of range
                         JOptionPane.showMessageDialog(employeeFrame.this,
                                 "Employee Number Does Not Exist!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                        txtSearchEmployee.setText(""); // to clear the text field after error inputs
                     }
 
                 } catch (NumberFormatException ex) {
-                    // Invalid input error handler
+                    // Invalid input error handler // if entered input is not a number
                     JOptionPane.showMessageDialog(employeeFrame.this,
-                            "Please enter a valid employee Number", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                            "Please enter a valid employee Number\n" + ex.getMessage() + JOptionPane.ERROR_MESSAGE);
+                    txtSearchEmployee.setText(""); // to clear the text field after error inputs
                 }
 
             }
         });
     }
 
-    // Method to load employee info to the labels and text fields
-    private void employeeInfo (String loggedInEmployeeNumber) {
+    // Method to load employee info to the labels fields
+    private void employeeInfo (String searchedEmployeeNumber) {
         // Employee Info
         EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
         ArrayList<Employee> employees = dataFile.getEmployeeData();
 
-        // Find the logged employee from the frameLogin class using the parameters of this constructor
-        Employee loggedInEmployee = null;
+        // Placeholder remains null if the entered employee number is not found
+        Employee searchedEmployee = null;
 
+        // iterates through the (employees) array list
         for (Employee emp : employees) {
-            if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(loggedInEmployeeNumber)) {
-                loggedInEmployee = emp;
+            if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(searchedEmployeeNumber)) {
+                // if not null and employee number match: then an employee object is stored in searchedEmployee
+                searchedEmployee = emp;
                 break;
             }
         }
 
         // Set the text fields if an employee is found
-        if (loggedInEmployee != null) {
-            lblEmployeeNumber.setText(String.valueOf(loggedInEmployee.getEmployeeNumber()));
-            lblName.setText(loggedInEmployee.getPerson().getFirstName() + " " +
-                    loggedInEmployee.getPerson().getLastName());
-            lblBirthday.setText(String.valueOf(loggedInEmployee.getBirthday()));
-            lblStatus.setText(loggedInEmployee.getStatus());
+        if (searchedEmployee != null) {
+            lblEmployeeNumber.setText(String.valueOf(searchedEmployee.getEmployeeNumber()));
+            lblName.setText(searchedEmployee.getPerson().getFirstName() + " " +
+                    searchedEmployee.getPerson().getLastName());
+            lblBirthday.setText(String.valueOf(searchedEmployee.getBirthday()));
+            lblStatus.setText(searchedEmployee.getStatus());
 
             //Job
-            lblPosition.setText(loggedInEmployee.getJob().getPosition());
-            lblSupervisor.setText(loggedInEmployee.getJob().getSupervisor());
+            lblPosition.setText(searchedEmployee.getJob().getPosition());
+            lblSupervisor.setText(searchedEmployee.getJob().getSupervisor());
 
             // Contacts
-            txtAddress.setText(loggedInEmployee.getContactInfo().getAddress());
-            lblPhone.setText(loggedInEmployee.getContactInfo().getPhoneNumber());
+            txtAddress.setText(searchedEmployee.getContactInfo().getAddress());
+            lblPhone.setText(searchedEmployee.getContactInfo().getPhoneNumber());
 
             // Government ID
-            lblSSS.setText(loggedInEmployee.getGovID().getsssID());
-            lblPhilhealth.setText(loggedInEmployee.getGovID().getphilhealthID());
-            lblTin.setText(loggedInEmployee.getGovID().gettinID());
-            lblPagibig.setText(loggedInEmployee.getGovID().getpagibigID());
+            lblSSS.setText(searchedEmployee.getGovID().getsssID());
+            lblPhilhealth.setText(searchedEmployee.getGovID().getphilhealthID());
+            lblTin.setText(searchedEmployee.getGovID().gettinID());
+            lblPagibig.setText(searchedEmployee.getGovID().getpagibigID());
 
-            //Payroll
-            lblBasicSalary.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getBasicSalary()));
-            lblRiceSubsidy.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getRiceSubsidy()));
-            lblPhoneAllowance.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getPhoneAllowance()));
-            lblClothingAllowance.setText("₱ " + String.valueOf(loggedInEmployee.getCompensation().getClothingAllowance()));
+            // Compensation
+            lblBasicSalary.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getBasicSalary()));
+            lblRiceSubsidy.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getRiceSubsidy()));
+            lblPhoneAllowance.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getPhoneAllowance()));
+            lblClothingAllowance.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getClothingAllowance()));
+            lblHourlyRate.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getHourlyRate()));
 
-            employeeSalary(loggedInEmployeeNumber);
+            employeeSalary(searchedEmployeeNumber);
         }
     }
 
-    private void employeeSalary (String loggedInEmployeeNumber) {
+    // Method to set the salary on label fields
+    private void employeeSalary (String searchedEmployeeNumber) {
         // Employee Info
         EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
         ArrayList<Employee> employees = dataFile.getEmployeeData();
 
         SalaryDeduction deduction = new SalaryDeduction();
 
-        // Find the logged employee from the frameLogin class using the parameters of this constructor
-        Employee loggedInEmployee = null;
+        // Placeholder remains null if the entered employee number is not found
+        Employee searchedEmployee = null;
 
+        // iterates through the (employees) array list
         for (Employee emp : employees) {
-            if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(loggedInEmployeeNumber)) {
-                loggedInEmployee = emp;
+            // if not null and employee number match: then an employee object is stored in searchedEmployee
+            if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(searchedEmployeeNumber)) {
+                searchedEmployee = emp;
                 break;
             }
         }
 
-        if (loggedInEmployee != null) {
-            double monthlyGross = loggedInEmployee.getCompensation().getBasicSalary()
-                    + loggedInEmployee.getCompensation().getRiceSubsidy()
-                    + loggedInEmployee.getCompensation().getPhoneAllowance()
-                    + loggedInEmployee.getCompensation().getClothingAllowance();
+        // Check if searchedEmployee is not null
+        if (searchedEmployee != null) {
+            double monthlyGross = searchedEmployee.getCompensation().getBasicSalary()
+                    + searchedEmployee.getCompensation().getRiceSubsidy()
+                    + searchedEmployee.getCompensation().getPhoneAllowance()
+                    + searchedEmployee.getCompensation().getClothingAllowance();
 
             // Setting salary values
-            loggedInEmployee.getSalary().setMonthlyGross(monthlyGross);
-            loggedInEmployee.getSalary().setWeeklyGross(monthlyGross / 4);
-            loggedInEmployee.getSalary().setWeeklyNet(loggedInEmployee.getSalary().getWeeklyGross()
-            - deduction.getTotalSalaryDeductions(loggedInEmployee.getCompensation().getBasicSalary()) / 4);
+            searchedEmployee.getSalary().setMonthlyGross(monthlyGross);
+            searchedEmployee.getSalary().setWeeklyGross(monthlyGross / 4);
+            searchedEmployee.getSalary().setWeeklyNet(searchedEmployee.getSalary().getWeeklyGross()
+            - deduction.getTotalSalaryDeductions(searchedEmployee.getCompensation().getBasicSalary()) / 4);
 
             // Setting lbl texts
-            lblMonthlyGross.setText("₱ " + String.valueOf(loggedInEmployee.getSalary().getMonthlyGross()));
-            lblWeeklyGross.setText("₱ " + String.valueOf(loggedInEmployee.getSalary().getWeeklyGross()));
-            lblWeeklyNet.setText("₱ " + String.valueOf(loggedInEmployee.getSalary().getWeeklyNet()));
+            lblMonthlyGross.setText("₱ " + String.valueOf(searchedEmployee.getSalary().getMonthlyGross()));
+            lblWeeklyGross.setText("₱ " + String.valueOf(searchedEmployee.getSalary().getWeeklyGross()));
+            lblWeeklyNet.setText("₱ " + String.valueOf(searchedEmployee.getSalary().getWeeklyNet()));
 
         }
-
-
     }
 
-    // Comment out the added feature
+    // Comment this out because this is an additional feature NOT from the console app
     // Saving it just in case
     /*
     // Method to load the attendance records in the tableAttendanceRecords

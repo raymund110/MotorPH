@@ -1,11 +1,10 @@
 package com.motorph;
 
+// Calculate all deductions
 public class SalaryDeduction {
 
-    private double basicSalary;
-
     // Calculate SSS Deduction
-    private double sssdeduction() {
+    public double getSSSdeduction(double basicSalary) {
         final int maxContribution = 25000; // Max Contribution
         // If salary is less than maxContribution(25000): Deducts 4.5% of actual salary
         if ((int) Math.round(basicSalary) < maxContribution) {
@@ -16,7 +15,7 @@ public class SalaryDeduction {
     }
 
     // Calculate withholding tax based on salary brackets
-    private double withholdingTax() {
+    public double getWithholdingTax(double basicSalary) {
         double withHoldingTax = 0; // No tax for salary <=20,833
 
         if (basicSalary > 20833 && basicSalary <= 33333) { // 15% for salary between 20,833 and 33,333
@@ -42,7 +41,7 @@ public class SalaryDeduction {
     }
 
     // Calculate Pag-ibig contribution
-    private double pagibigDeduction() {
+    public double getPagibigDeduction(double basicSalary) {
         final double minimunCompensation = 1500;
         // 2% if salary is > 1500
         if (basicSalary > minimunCompensation) {
@@ -53,13 +52,15 @@ public class SalaryDeduction {
     }
 
     // Calculates Philhealth contribution
-    private double philHealthDeduction() {
+    public double getPhilHealthDeduction(double basicSalary) {
         return basicSalary * 0.05;
     }
 
-    // This calculates the total salary deductions
-    public double getTotalSalaryDeductions(double basicSalary) {
-        this.basicSalary = basicSalary; // sets the value of the basic salary
-        return sssdeduction() + pagibigDeduction() + philHealthDeduction() + withholdingTax();
+    public double getTotalDeductions (double basicSalary) {
+        return getSSSdeduction(basicSalary)
+                + getWithholdingTax(basicSalary)
+                + getPagibigDeduction(basicSalary)
+                + getPhilHealthDeduction(basicSalary);
     }
+
 }

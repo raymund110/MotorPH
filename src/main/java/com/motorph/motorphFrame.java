@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class motorphFrame extends JFrame {
@@ -18,11 +20,18 @@ public class motorphFrame extends JFrame {
     private JTextField txtStartDate;
     private JTextField txtEndDate;
     private JTable tableEmployeeList;
+    private JLabel lblSSS;
+    private JLabel lblWithholdingTax;
+    private JLabel lblPagibig;
+    private JLabel lblPhilhealth;
+    private JLabel lblWorkHours;
+    private JLabel lblNetSalary;
+    private JLabel lblTotalDeductions;
 
     public motorphFrame () {
         this.setContentPane(this.panelMotorPH);
         this.setTitle("MotorPH");
-        this.setSize(930,600);
+        this.setSize(950,600);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,6 +43,7 @@ public class motorphFrame extends JFrame {
         employeeTable();
 
         this.setVisible(true); // Set employeeFrame visible
+
         txtEmployeeNumber.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -46,7 +56,7 @@ public class motorphFrame extends JFrame {
                     // Range of employee numbers based on the csv file
                     if (employeeNumber >= 10001 && employeeNumber <= 10034) {
                         // if entered employee number is inside range
-                        salaryDetails(search);
+                        salary(search);
                     }
 
                     else {
@@ -64,12 +74,32 @@ public class motorphFrame extends JFrame {
                 }
             }
         });
+
+        txtEndDate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtStartDate.getText();
+                txtEndDate.getText();
+
+                try {
+                    if (txtStartDate != null && txtEndDate != null) {
+                        JOptionPane.showMessageDialog(motorphFrame.this, "Okay!");
+                    }
+                }
+
+                catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+        });
     }
 
     public void employeeTable () {
         // Instantiate Employee
-        EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
-        ArrayList<Employee> employee = dataFile.getEmployeeData();
+        EmployeeDataFromFile dataFile = new EmployeeDataFromFile(); //
+        // Retrieves the ArrayList of Employee objects from EmployeeDataFromFile
+        ArrayList<Employee> employee = dataFile.getEmployeeData(); // Store Employee Objects
 
         // Column Names
         String[] columnName = {"Employee Number", "Name", "Birthday"};
@@ -104,10 +134,9 @@ public class motorphFrame extends JFrame {
 
     }
 
-    public void salaryDetails (String searchedEmployeeNumber) {
+    public void salary (String searchedEmployeeNumber) {
         // Instantiate Employee
-        EmployeeDataFromFile dataFile = new EmployeeDataFromFile(); //
-        // Retrieves the ArrayList of Employee objects from EmployeeDataFromFile
+        EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
         ArrayList<Employee> employees = dataFile.getEmployeeData(); // Store Employee Objects
 
         // Placeholder remains null if the entered employee number is not found
@@ -127,8 +156,8 @@ public class motorphFrame extends JFrame {
             lblName.setText(searchedEmployee.getPerson().getFirstName() + " " +
                     searchedEmployee.getPerson().getLastName());
             lblPosition.setText(searchedEmployee.getJob().getPosition());
-            lblHourlyRate.setText(String.valueOf(searchedEmployee.getCompensation().getHourlyRate()));
-            lblBasicSalary.setText(String.valueOf(searchedEmployee.getCompensation().getBasicSalary()));
+            lblHourlyRate.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getHourlyRate()));
+            lblBasicSalary.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getBasicSalary()));
             // Calculate gross salary
             double grossSalary = searchedEmployee.getCompensation().getBasicSalary() +
                     searchedEmployee.getCompensation().getRiceSubsidy() +
@@ -137,7 +166,38 @@ public class motorphFrame extends JFrame {
             // Set gross salary value
             searchedEmployee.getCompensation().setGrossSalary(grossSalary);
 
-            lblGrossSalary.setText(String.valueOf(searchedEmployee.getCompensation().getGrossSalary()));
+            lblGrossSalary.setText("₱ " + String.valueOf(searchedEmployee.getCompensation().getGrossSalary()));
+
+            double basicSalary = searchedEmployee.getCompensation().getBasicSalary();
+
+            // Deductions
+            lblSSS.setText("₱ " + String.valueOf(searchedEmployee.getSalaryDeduction().getSSSdeduction(basicSalary)));
+            lblWithholdingTax.setText("₱ " + String.valueOf(searchedEmployee.getSalaryDeduction().getWithholdingTax(basicSalary)));
+            lblPagibig.setText("₱ " + String.valueOf(searchedEmployee.getSalaryDeduction().getPagibigDeduction(basicSalary)));
+            lblPhilhealth.setText("₱ " + String.valueOf(searchedEmployee.getSalaryDeduction().getPhilHealthDeduction(basicSalary)));
+            lblTotalDeductions.setText("₱ " + String.valueOf(searchedEmployee.getSalaryDeduction().getTotalDeductions(basicSalary)));
+        }
+
+    }
+
+    public void hourBasedSalary (String searchedEmployeeNumber, LocalDate startDate, LocalDate endDate) {
+        AttendanceDataFromFile dataFromFile = new AttendanceDataFromFile();
+        ArrayList<Attendance> attendances = dataFromFile.getAttendanceData();
+
+        Attendance searchEmployee = null;
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        for (Attendance att : attendances) {
+            if (att != null && String.valueOf(att.getEmployee().getEmployeeNumber()).equals(searchedEmployeeNumber)) {
+                searchEmployee = att;
+                break;
+            }
+        }
+
+        if (searchEmployee != null) {
+            // Set timein and timeout
+
         }
 
     }

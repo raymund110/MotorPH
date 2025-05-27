@@ -2,6 +2,7 @@ package com.motorph;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -70,18 +71,13 @@ public class AttendanceDataFromFile {
         return attendance;
     }
 
-    /*
-    // Not Done
-    public double calculateDailyWorkHours () {
-        double dailyHours = 0.0;
-        return dailyHours;
+    public double getWorkHours (LocalDate timeIn, LocalDate timeOut) {
+        double totalHours = 0;
+        double workHours = Duration.between(timeIn, timeOut).toMinutes() / 60.0;
+        totalHours += workHours;
+
+        return totalHours;
     }
 
-    // complete calculate hours worked
-    // Not Done
-    public double calculateWorkHours () {
-        double workHours = 0.0;
-        return workHours;
-    }*/
 
 }

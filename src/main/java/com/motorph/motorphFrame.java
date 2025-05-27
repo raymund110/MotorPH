@@ -135,9 +135,9 @@ public class motorphFrame extends JFrame {
                     searchedEmployee.getCompensation().getPhoneAllowance() +
                     searchedEmployee.getCompensation().getClothingAllowance();
             // Set gross salary value
-            searchedEmployee.getSalary().setGrossSalary(grossSalary);
+            searchedEmployee.getCompensation().setGrossSalary(grossSalary);
 
-            lblGrossSalary.setText(String.valueOf(searchedEmployee.getSalary().getGrossSalary()));
+            lblGrossSalary.setText(String.valueOf(searchedEmployee.getCompensation().getGrossSalary()));
         }
 
     }

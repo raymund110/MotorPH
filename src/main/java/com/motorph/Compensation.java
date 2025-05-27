@@ -1,7 +1,7 @@
 package com.motorph;
 
 public class Compensation {
-    private double basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, hourlyRate, grossSemiMonthlyRate;
+    private double basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, hourlyRate, grossSemiMonthlyRate, grossSalary;
 
     public double getBasicSalary() {
         return basicSalary;
@@ -49,6 +49,16 @@ public class Compensation {
 
     public void setGrossSemiMonthlyRate(double grossSemiMonthlyRate) {
         this.grossSemiMonthlyRate = grossSemiMonthlyRate;
+    }
+
+    public double getGrossSalary() {
+        return grossSalary;
+    }
+
+    public void setGrossSalary(double grossSalary
+    ) {
+        this.grossSalary = grossSalary
+        ;
     }
 
 }

@@ -83,8 +83,9 @@ public class employeeFrame extends JFrame {
     // Method to load employee info to the labels fields
     private void employeeInfo (String searchedEmployeeNumber) {
         // Employee Info
-        EmployeeDataFromFile dataFile = new EmployeeDataFromFile();
-        ArrayList<Employee> employees = dataFile.getEmployeeData();
+        EmployeeDataFromFile dataFile = new EmployeeDataFromFile(); //
+        // Retrieves the ArrayList of Employee objects from EmployeeDataFromFile
+        ArrayList<Employee> employees = dataFile.getEmployeeData(); // Store Employee Objects
 
         // Placeholder remains null if the entered employee number is not found
         Employee searchedEmployee = null;

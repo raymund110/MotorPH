@@ -77,6 +77,7 @@ public class AttendanceDataFromFile {
         return dailyHours;
     }
 
+    // complete calculate hours worked
     // Not Done
     public double calculateWorkHours () {
         double workHours = 0.0;

@@ -2,14 +2,16 @@ package com.motorph;
 
 public class Salary {
 
-    private double monthlyGross, weeklyGross, weeklyNet;
+    private double grossSalary, weeklyGross, weeklyNet;
 
-    public double getMonthlyGross() {
-        return monthlyGross;
+    public double getGrossSalary() {
+        return grossSalary;
     }
 
-    public void setMonthlyGross(double monthlyGross) {
-        this.monthlyGross = monthlyGross;
+    public void setGrossSalary(double grossSalary
+    ) {
+        this.grossSalary = grossSalary
+        ;
     }
 
     public double getWeeklyGross() {

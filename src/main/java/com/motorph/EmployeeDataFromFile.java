@@ -100,5 +100,4 @@ public class EmployeeDataFromFile {
         }
         return employee;
     }
-
 }

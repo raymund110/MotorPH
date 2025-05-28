@@ -48,6 +48,7 @@ public class motorphFrame extends JFrame {
         employeeTable();
 
         this.setVisible(true); // Set employeeFrame visible
+        txtEmployeeNumber.requestFocus();
 
         // Searching Employee function
         txtEmployeeNumber.addActionListener(new ActionListener() {

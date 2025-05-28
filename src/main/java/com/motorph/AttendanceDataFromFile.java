@@ -71,13 +71,4 @@ public class AttendanceDataFromFile {
         return attendance;
     }
 
-    public double getWorkHours (LocalDate timeIn, LocalDate timeOut) {
-        double totalHours = 0;
-        double workHours = Duration.between(timeIn, timeOut).toMinutes() / 60.0;
-        totalHours += workHours;
-
-        return totalHours;
-    }
-
-
 }

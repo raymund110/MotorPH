@@ -84,6 +84,7 @@ public class EmployeeDataFromFile {
             String riceSubsidy = values[14].replace(",", "").replace("\"", "").trim();
             String phoneAllowance = values[15].replace(",", "").replace("\"", "").trim();
             String clothingAllowance = values[16].replace(",", "").replace("\"", "").trim();
+            String grossSemi = values[17].replace(",", "").replace("\"", "").trim();
             String hourlyRate = values[18].replace(",", "").replace("\"", "").trim();
 
             // Compensation
@@ -92,6 +93,7 @@ public class EmployeeDataFromFile {
             compensation.setRiceSubsidy(Double.parseDouble(riceSubsidy));
             compensation.setPhoneAllowance(Double.parseDouble(phoneAllowance));
             compensation.setClothingAllowance(Double.parseDouble(clothingAllowance));
+            compensation.setGrossSemiMonthlyRate(Double.parseDouble(grossSemi));
             compensation.setHourlyRate(Double.parseDouble(hourlyRate));
         }
 

@@ -52,7 +52,7 @@ public class loginFrame extends JFrame{
         String passwordID = new String(psPassword.getPassword());
         // Check if credintials is correct
         if (userID.equals("Admin") && passwordID.equals("1234")) {
-            new motorphFrame(); // if correct open main window
+            new MainFrame(); // if correct open main window
             dispose(); // dispose login frame
         }
         else {

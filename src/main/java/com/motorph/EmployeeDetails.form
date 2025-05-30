@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.motorph.EmployeeDetails">
+  <grid id="27dc6" binding="panelEmpDetails" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="20" y="20" width="958" height="724"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="2ffe9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono" size="20" style="1"/>
+          <text value="MotorPH"/>
+        </properties>
+      </component>
+      <grid id="3afa3" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="10" left="10" bottom="10" right="10"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="etched" title="Employee Details">
+          <font name="JetBrains Mono" size="16" style="1"/>
+        </border>
+        <children>
+          <grid id="24647" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="5" bottom="5" right="5"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Contacts">
+              <font name="JetBrains Mono" size="14" style="1"/>
+            </border>
+            <children>
+              <component id="2a422" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Phone Number:"/>
+                </properties>
+              </component>
+              <component id="6b478" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Address:"/>
+                </properties>
+              </component>
+              <component id="a99de" class="javax.swing.JLabel" binding="lblPhoneNumber">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="phoneNumber"/>
+                </properties>
+              </component>
+              <component id="2c699" class="javax.swing.JTextArea" binding="txtAddress">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="1" use-parent-layout="false">
+                    <preferred-size width="80" height="20"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                  <enabled value="true"/>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <lineWrap value="true"/>
+                  <rows value="0"/>
+                  <wrapStyleWord value="true"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="8a8bb" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="5" bottom="5" right="5"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Basic Information">
+              <font name="JetBrains Mono" size="14" style="1"/>
+            </border>
+            <children>
+              <component id="6e951" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <horizontalAlignment value="10"/>
+                  <horizontalTextPosition value="10"/>
+                  <text value="Employee Number:"/>
+                </properties>
+              </component>
+              <component id="eb123" class="javax.swing.JLabel" binding="lblEmployeeNumber">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="empNum"/>
+                </properties>
+              </component>
+              <component id="4d01f" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <horizontalAlignment value="10"/>
+                  <horizontalTextPosition value="10"/>
+                  <text value="Employee Name:"/>
+                </properties>
+              </component>
+              <component id="83b00" class="javax.swing.JLabel" binding="lblName">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="empName"/>
+                </properties>
+              </component>
+              <component id="1ac44" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <horizontalAlignment value="10"/>
+                  <horizontalTextPosition value="10"/>
+                  <text value="Birthday:"/>
+                </properties>
+              </component>
+              <component id="642f9" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <horizontalAlignment value="10"/>
+                  <horizontalTextPosition value="10"/>
+                  <text value="Status:"/>
+                </properties>
+              </component>
+              <component id="16680" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <horizontalAlignment value="10"/>
+                  <horizontalTextPosition value="10"/>
+                  <text value="Position:"/>
+                </properties>
+              </component>
+              <component id="164c9" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <horizontalAlignment value="10"/>
+                  <horizontalTextPosition value="10"/>
+                  <text value="Supervisor:"/>
+                </properties>
+              </component>
+              <component id="8b205" class="javax.swing.JLabel" binding="lblBirthday">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="brithday"/>
+                </properties>
+              </component>
+              <component id="ceb02" class="javax.swing.JLabel" binding="lblJobStatus">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="status"/>
+                </properties>
+              </component>
+              <component id="4bde0" class="javax.swing.JLabel" binding="lblPosition">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="position"/>
+                </properties>
+              </component>
+              <component id="4e91e" class="javax.swing.JLabel" binding="lblSupervisor">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="supervisor"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="1ba96" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="5" bottom="5" right="5"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Government ID">
+              <font name="JetBrains Mono" size="14" style="1"/>
+            </border>
+            <children>
+              <component id="a19b4" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="SSS Number:"/>
+                </properties>
+              </component>
+              <component id="b907c" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Philhealth Number:"/>
+                </properties>
+              </component>
+              <component id="2700e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="TIN Number:"/>
+                </properties>
+              </component>
+              <component id="41163" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="20" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Pag-ibig Number:"/>
+                </properties>
+              </component>
+              <component id="1a28a" class="javax.swing.JLabel" binding="lblSSSNumber">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="sssNumber"/>
+                </properties>
+              </component>
+              <component id="8c779" class="javax.swing.JLabel" binding="lblPhilhealthNumber">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="philhealth"/>
+                </properties>
+              </component>
+              <component id="2cb62" class="javax.swing.JLabel" binding="lblTinNumber">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="tinNumber"/>
+                </properties>
+              </component>
+              <component id="79b5e" class="javax.swing.JLabel" binding="lblPagibigNumber">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Pagibig"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="323e4" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="10" left="10" bottom="10" right="10"/>
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="etched" title="Employee Salary">
+          <font name="JetBrains Mono" size="16" style="1"/>
+        </border>
+        <children>
+          <grid id="c2a71" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="5" bottom="5" right="5"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Compensation">
+              <font name="JetBrains Mono" size="14" style="1"/>
+            </border>
+            <children>
+              <component id="cf963" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="205" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Basic Salary:"/>
+                </properties>
+              </component>
+              <component id="27adf" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="205" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Rice Subsidy:"/>
+                </properties>
+              </component>
+              <component id="522f0" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="205" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Phone Allowance:"/>
+                </properties>
+              </component>
+              <component id="c6b10" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="205" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Clothing Allowance:"/>
+                </properties>
+              </component>
+              <component id="48ec5" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="205" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Gross Semi-montly Rate:"/>
+                </properties>
+              </component>
+              <component id="9c432" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="205" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Hourly rate:"/>
+                </properties>
+              </component>
+              <component id="f8ba1" class="javax.swing.JLabel" binding="lblBasicSalary">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="₱ 0000.00"/>
+                </properties>
+              </component>
+              <component id="9199f" class="javax.swing.JLabel" binding="lblRiceSubsidy">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="₱ 0000.00"/>
+                </properties>
+              </component>
+              <component id="7d558" class="javax.swing.JLabel" binding="lblPhoneAllowance">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="₱ 0000.00"/>
+                </properties>
+              </component>
+              <component id="4fe58" class="javax.swing.JLabel" binding="lblClothingAllowance">
+                <constraints>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="₱ 0000.00"/>
+                </properties>
+              </component>
+              <component id="be958" class="javax.swing.JLabel" binding="lblGrossSemi">
+                <constraints>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="₱ 0000.00"/>
+                </properties>
+              </component>
+              <component id="46447" class="javax.swing.JLabel" binding="lblHourlyRate">
+                <constraints>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="₱ 0000.00"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="ec935" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="5" bottom="5" right="5"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Salary Details">
+              <font name="JetBrains Mono" size="14" style="1"/>
+            </border>
+            <children>
+              <component id="a65d5" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="205" height="17"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Total Hours Work:"/>
+                </properties>
+              </component>
+              <grid id="bc0d5" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="5" left="5" bottom="5" right="5"/>
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                </properties>
+                <border type="etched" title="Deductions">
+                  <font name="JetBrains Mono" size="14" style="1"/>
+                </border>
+                <children>
+                  <component id="2f761" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="205" height="17"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="SSS:"/>
+                    </properties>
+                  </component>
+                  <component id="781ae" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="205" height="17"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="Withholding Tax:"/>
+                    </properties>
+                  </component>
+                  <component id="9fafc" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="205" height="17"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="Pag-ibig:"/>
+                    </properties>
+                  </component>
+                  <component id="a4398" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="205" height="17"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="----------"/>
+                    </properties>
+                  </component>
+                  <component id="8f761" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="205" height="17"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="Total Deductions:"/>
+                    </properties>
+                  </component>
+                  <component id="25d55" class="javax.swing.JLabel" binding="lblSSS">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="₱ 0000.00"/>
+                    </properties>
+                  </component>
+                  <component id="bad2f" class="javax.swing.JLabel" binding="lblWithholdingTax">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="₱ 0000.00"/>
+                    </properties>
+                  </component>
+                  <component id="af472" class="javax.swing.JLabel" binding="lblPagibig">
+                    <constraints>
+                      <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="₱ 0000.00"/>
+                    </properties>
+                  </component>
+                  <component id="54e70" class="javax.swing.JLabel" binding="lblTotalDeduction">
+                    <constraints>
+                      <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="₱ 0000.00"/>
+                    </properties>
+                  </component>
+                  <component id="87d07" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="205" height="17"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="Philhealth:"/>
+                    </properties>
+                  </component>
+                  <component id="519c6" class="javax.swing.JLabel" binding="lblPhulhealth">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="₱ 0000.00"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <component id="b6258" class="javax.swing.JLabel" binding="lblHoursWork">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="00.00 Hours"/>
+                </properties>
+              </component>
+              <grid id="4caf8" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="5" left="5" bottom="5" right="5"/>
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                </properties>
+                <border type="etched" title="Net Salary">
+                  <font name="JetBrains Mono" size="14" style="1"/>
+                </border>
+                <children>
+                  <component id="ac08c" class="javax.swing.JLabel" binding="lblNetSalary">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font name="JetBrains Mono" size="14" style="0"/>
+                      <text value="₱ 0000.00"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <hspacer id="696d1">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="95b" class="javax.swing.JButton" binding="btnBack">
+                <constraints>
+                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Back"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="20a0a" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="5" left="5" bottom="5" right="5"/>
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Compute Salary">
+              <font name="JetBrains Mono" size="14" style="1"/>
+            </border>
+            <children>
+              <component id="90ac5" class="javax.swing.JButton" binding="btnCompute">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <text value="Compute"/>
+                </properties>
+              </component>
+              <component id="8423c" class="javax.swing.JComboBox" binding="cbxMonthSalary">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="JetBrains Mono" size="14" style="0"/>
+                  <model>
+                    <item value="January"/>
+                    <item value="February"/>
+                    <item value="March"/>
+                    <item value="April"/>
+                    <item value="May"/>
+                    <item value="June"/>
+                    <item value="July"/>
+                    <item value="August"/>
+                    <item value="September"/>
+                    <item value="October"/>
+                    <item value="November"/>
+                    <item value="December"/>
+                  </model>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <vspacer id="a6460">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+    </children>
+  </grid>
+</form>

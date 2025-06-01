@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
     private String selectedEmployee; // Placeholder for current selected employee
 
     public MainFrame() {
+        // Frame config
         this.setContentPane(this.panelMotorPH);
         this.setTitle("MotorPH");
         this.setSize(1050,630);
@@ -41,12 +42,13 @@ public class MainFrame extends JFrame {
                 super.mouseClicked(e);
                 int row = tableEmployeeList.getSelectedRow(); // get selected row index
                 DefaultTableModel model = (DefaultTableModel)tableEmployeeList.getModel();
+                // get EmployeeNumber(column 0) from the selected row
                 selectedEmployee = model.getValueAt(row, 0).toString();
-//                btnViewEmployee.setEnabled(true);
+                btnViewEmployee.setEnabled(true); // Make view employee clickable
             }
         });
 
-        // View EmployeeDetails frame
+        // View Employee
         btnViewEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,7 +65,7 @@ public class MainFrame extends JFrame {
             }
         });
 
-        // Logout from MainFrame
+        // Logout
         btnLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -76,7 +78,7 @@ public class MainFrame extends JFrame {
                 }
             }
         });
-
+        // New Employee
         btnNewEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

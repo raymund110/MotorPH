@@ -188,6 +188,14 @@ public class EmployeeDetails extends JFrame{
         }
 
         if (totalHoursWorked == 0.0) {
+            // Default display
+            lblHoursWork.setText("0.00 Hours");
+            lblSSS.setText("₱ 0000.00");
+            lblWithholdingTax.setText("₱ 0000.00");
+            lblPhilhealth.setText("₱ 0000.00");
+            lblPagibig.setText("₱ 0000.00");
+            lblTotalDeduction.setText("₱ 0000.00");
+            lblNetSalary.setText("₱ 0000.00");
             JOptionPane.showMessageDialog(EmployeeDetails.this,
                     "No attendance data from the selected month\nSelect a different month",
                     "Information", JOptionPane.INFORMATION_MESSAGE);

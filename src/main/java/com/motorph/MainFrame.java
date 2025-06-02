@@ -83,7 +83,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int option = JOptionPane.showConfirmDialog(MainFrame.this,
-                        "Are you sure you want to create new employee?", "Confirmation", JOptionPane.YES_NO_OPTION);
+                        "Are you sure you want to add new employee?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
                 if (option == 0) {
                     new NewEmployee();

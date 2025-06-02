@@ -1,17 +1,20 @@
 package com.motorph;
 
+import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class EmployeeDataFromFile {
     private final ArrayList<Employee> employees = new ArrayList<>();
+    private static final String DataFile = "src/main/resources/MotorPH Employee Data.csv";
 
     public EmployeeDataFromFile() {
-        String employeeData = "src/main/resources/MotorPH Employee Data.csv";
-        dataFromFile(employeeData);
+        dataFromFile(DataFile);
     }
 
     // Getter method that returns employees ArrayList that contains all employee objects
@@ -31,6 +34,41 @@ public class EmployeeDataFromFile {
             }
         } catch (Exception e) { // Handle reading file errors
             System.out.println("Error reading file: " + e.getMessage());
+        }
+    }
+
+    // Add new employee data to the file. Returning boolean value for showing diaglog
+    public boolean addNewEmployee (String employeeData, JFrame NewEmployee) {
+        try {
+            ArrayList<String> existingData = new ArrayList<>();
+            String newEmpNumber = employeeData.split(",")[0].trim();
+            // Read the existing file to check the duplicate employee number
+            try (BufferedReader reader = new BufferedReader(new FileReader(DataFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    existingData.add(line);
+                    // check if the employee number is already existing
+                    if (line.startsWith(newEmpNumber + ",")) {
+                        // Message dialog if the employee already exists
+                        JOptionPane.showMessageDialog(NewEmployee,
+                                "Employee Number already exists!",
+                                "Already Exists", JOptionPane.ERROR_MESSAGE);
+                        return false;
+                    }
+                }
+            }
+            // Append new employee data
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(DataFile, true))) {
+                writer.newLine();
+                writer.append(employeeData);
+                return true;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error saving employee data: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
@@ -79,11 +117,12 @@ public class EmployeeDataFromFile {
             job.setSupervisor(values[12].trim());
 
             // Parse salary and allowances
-            // Remove additional "" quotation marks to all double data types
+            // Remove additional "" quotation marks to all double data types to parse properly
             String basicSalary = values[13].replace(",", "").replace("\"", "").trim();
             String riceSubsidy = values[14].replace(",", "").replace("\"", "").trim();
             String phoneAllowance = values[15].replace(",", "").replace("\"", "").trim();
             String clothingAllowance = values[16].replace(",", "").replace("\"", "").trim();
+            String grossSemi = values[17].replace(",", "").replace("\"", "").trim();
             String hourlyRate = values[18].replace(",", "").replace("\"", "").trim();
 
             // Compensation
@@ -92,6 +131,7 @@ public class EmployeeDataFromFile {
             compensation.setRiceSubsidy(Double.parseDouble(riceSubsidy));
             compensation.setPhoneAllowance(Double.parseDouble(phoneAllowance));
             compensation.setClothingAllowance(Double.parseDouble(clothingAllowance));
+            compensation.setGrossSemiMonthlyRate(Double.parseDouble(grossSemi));
             compensation.setHourlyRate(Double.parseDouble(hourlyRate));
         }
 

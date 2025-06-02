@@ -3,6 +3,8 @@ package com.motorph;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class loginFrame extends JFrame{
     private JTextField txtUser;
@@ -16,7 +18,21 @@ public class loginFrame extends JFrame{
         this.setSize(350,350);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // confirmation on closing the window
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                int option = JOptionPane.showConfirmDialog(loginFrame.this,
+                        "Are you sure you want to close MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
+
         // Logo Config
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
         this.setIconImage(logo.getImage());
@@ -52,7 +68,7 @@ public class loginFrame extends JFrame{
         String passwordID = new String(psPassword.getPassword());
         // Check if credintials is correct
         if (userID.equals("Admin") && passwordID.equals("1234")) {
-            new motorphFrame(); // if correct open main window
+            new MainFrame(); // if correct open main window
             dispose(); // dispose login frame
         }
         else {

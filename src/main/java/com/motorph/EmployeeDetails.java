@@ -3,6 +3,8 @@ package com.motorph;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -48,7 +50,20 @@ public class EmployeeDetails extends JFrame{
         this.setSize(850,700);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // confirmation on closing the window
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                int option = JOptionPane.showConfirmDialog(EmployeeDetails.this,
+                        "Are you sure you want to close MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
 
         // Logo Config
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");

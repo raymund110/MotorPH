@@ -2,10 +2,7 @@ package com.motorph;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
 import java.text.DecimalFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -41,7 +38,20 @@ public class NewEmployee extends JFrame{
         this.setSize(800,650);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // confirmation on closing the window
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                int option = JOptionPane.showConfirmDialog(NewEmployee.this,
+                        "Are you sure you want to close MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
 
         // Logo Config
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
@@ -59,43 +69,50 @@ public class NewEmployee extends JFrame{
                         "Are sure you want to go back?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
                 if (option == 0) {
-                    new MainFrame();
                     dispose();
+                    new MainFrame();
                 }
             }
         });
-
+        // Save button
         btnSaveEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (validateInputs()) {
+                if (validateInputs()) { // If inputs are valid
                     EmployeeDataFromFile employeeData = new EmployeeDataFromFile();
+                    // process the saving of employee data to the CSV file using the EmployeeDataFromFile
                     boolean saved = employeeData.addNewEmployee(saveEmployee(), NewEmployee.this);
-                    if (saved) {
+                    if (saved) { // message to the user if addNewEmployee method returns true
                         JOptionPane.showMessageDialog(NewEmployee.this,
                                 "Employee saved successfully!",
                                 "Success",
                                 JOptionPane.INFORMATION_MESSAGE);
-                        clearForm();
+                        dispose();
+                        new MainFrame();
                     }
                 }
             }
         });
+        pnlNewEmployee.addComponentListener(new ComponentAdapter() {
+        });
     }
-
-    // Checking formats text fields if empty
+    // validating all input formats
     private boolean validateInputs () {
-        // Add more for empty text fields handling
-        if (txtEmployeeNumber.getText().trim().isEmpty() ||
-            txtLastName.getText().trim().isEmpty() ||
-            txtFirstName.getText().trim().isEmpty()) {
+        // Checking formats text fields if empty
+        if (txtEmployeeNumber.getText().trim().isEmpty() || txtLastName.getText().trim().isEmpty() || txtFirstName.getText().trim().isEmpty() ||
+                txtBirthday.getText().trim().isEmpty() || txtPhoneNumber.getText().trim().isEmpty() || txtAddress.getText().trim().isEmpty() ||
+                txtPosition.getText().trim().isEmpty() || txtSupervisor.getText().trim().isEmpty() || txtSSSNumber.getText().trim().isEmpty() ||
+                txtPhilhealthNumber.getText().trim().isEmpty() || txtTINNumber.getText().trim().isEmpty() || txtPagibigNumber.getText().trim().isEmpty() ||
+                txtBasicSalary.getText().trim().isEmpty() || txtRiceSubsidy.getText().trim().isEmpty() || txtPhoneAllowance.getText().trim().isEmpty() ||
+                txtClothingAllowance.getText().trim().isEmpty() || txtGrossSemi.getText().trim().isEmpty() || txtHourlyRate.getText().trim().isEmpty()
+            ){
             JOptionPane.showMessageDialog(NewEmployee.this,
                     "Please fill in all required fields",
                     "Validation Error",
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        try {
+        try { // checking the birthday format input
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             LocalDate.parse(txtBirthday.getText().trim(), formatter);
         } catch (DateTimeException e) {
@@ -105,7 +122,7 @@ public class NewEmployee extends JFrame{
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        try {
+        try { //Checking validity of numerical inputs
             Integer.parseInt(txtEmployeeNumber.getText().trim());
             Double.parseDouble(txtBasicSalary.getText().trim());
             Double.parseDouble(txtRiceSubsidy.getText().trim());
@@ -124,30 +141,9 @@ public class NewEmployee extends JFrame{
 
         return true; // inputs are valid
     }
-
-    // Clear text fields
-    private void clearForm () {
-        txtEmployeeNumber.setText("");
-        txtFirstName.setText("");
-        txtLastName.setText("");
-        txtBirthday.setText("");
-        txtPhoneNumber.setText("");
-        txtAddress.setText("");
-        txtPosition.setText("");
-        txtSupervisor.setText("");
-        txtSSSNumber.setText("");
-        txtPhilhealthNumber.setText("");
-        txtTINNumber.setText("");
-        txtPagibigNumber.setText("");
-        txtBasicSalary.setText("");
-        txtRiceSubsidy.setText("");
-        txtPhoneAllowance.setText("");
-        txtClothingAllowance.setText("");
-        txtGrossSemi.setText("");
-        txtHourlyRate.setText("");
-    }
-
+    // Save employee data inputs
     public String saveEmployee () {
+        // Basic info
         String empNumber = String.valueOf(txtEmployeeNumber.getText());
         String lastName = String.valueOf(txtLastName.getText());
         String firstName = String.valueOf(txtFirstName.getText());
@@ -185,7 +181,7 @@ public class NewEmployee extends JFrame{
                 + "," + basicSalary + "," + riceSubsidy + "," + phoneAllowance
                 + "," + clothingAllowance + "," + grossSemi + "," + hourlyRate;
     }
-
+    // Placeholders for users to know the important formats
     private void placeholders () {
         // Birthday placeholder
         txtBirthday.addFocusListener(new FocusAdapter() {

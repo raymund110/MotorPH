@@ -3,10 +3,7 @@ package com.motorph;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
@@ -25,7 +22,20 @@ public class MainFrame extends JFrame {
         this.setSize(1050,630);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // confirmation on closing the window
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                int option = JOptionPane.showConfirmDialog(MainFrame.this,
+                        "Are you sure you want to close MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    dispose();
+                    System.exit(0);
+                }
+            }
+        });
 
         // Logo Config
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
@@ -129,53 +139,4 @@ public class MainFrame extends JFrame {
         tableEmployeeList.setRowHeight(25);
 
     }
-
-    // Calculate the net salary based on the start date and end date inputs by the user
-//    private void hourBasedSalary (String searchedEmployeeNumber, LocalDate startDate, LocalDate endDate) {
-//        // Initialized the attendance and employee objects
-//        EmployeeDataFromFile employeeDataFromFile = new EmployeeDataFromFile();
-//        ArrayList<Employee> employees = employeeDataFromFile.getEmployeeData();
-//        AttendanceDataFromFile attendanceDataFromFile = new AttendanceDataFromFile();
-//        ArrayList<Attendance> attendances = attendanceDataFromFile.getAttendanceData();
-//
-//        double totalHoursWorked = 0.0;
-//        Employee employee = null;
-//
-//        // iterates through the (employees) array list
-//        for (Employee emp : employees) {
-//            if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(searchedEmployeeNumber)) {
-//                // if not null and employee number match: then an employee object is stored in searchedEmployee
-//                employee = emp;
-//                break;
-//            }
-//        }
-//
-//        if (employee != null) {
-//            // iterates through the (attendance) array list
-//            for (Attendance att : attendances) {
-//                if (att != null && String.valueOf(att.getEmployee().getEmployeeNumber()).equals(searchedEmployeeNumber)) {
-//                    LocalDate date = att.getAttendanceDate();
-//
-//                    if ((date.equals(startDate) || date.isAfter(startDate)) &&
-//                            (date.equals(endDate) || date.isBefore(endDate))) {
-//                        LocalTime timeIn = att.getTimeIn();
-//                        LocalTime timeOut = att.getTimeOut();
-//                        double hoursWork = Duration.between(timeIn, timeOut).toMinutes() / 60.0;
-//                        totalHoursWorked += hoursWork; // add hourswork to total hours worked
-//                    }
-//
-//                }
-//            }
-//            // Calculate the gross based on hours worked
-//            double gross = totalHoursWorked * employee.getCompensation().getHourlyRate();
-//            double deductions = employee.getSalaryDeduction()
-//                    .getTotalDeductions(employee.getCompensation().getBasicSalary());
-//            // Calculate netSalary
-//            double netSalary = gross - deductions;
-//
-//            lblWorkHours.setText(String.format("%,.2f hours", totalHoursWorked));
-//            lblNetSalary.setText("₱ " + String.format("%,.2f", netSalary));
-//        }
-//    }
-
 }

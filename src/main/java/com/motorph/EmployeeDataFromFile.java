@@ -1,7 +1,6 @@
 package com.motorph;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -41,15 +40,14 @@ public class EmployeeDataFromFile {
     // Add new employee data to the file. Returning boolean value for showing diaglog
     public boolean addNewEmployee (String employeeData, JFrame NewEmployee) {
         try {
-            // Read the existing file to check the duplicate employee number
             ArrayList<String> existingData = new ArrayList<>();
             String newEmpNumber = employeeData.split(",")[0].trim();
-
+            // Read the existing file to check the duplicate employee number
             try (BufferedReader reader = new BufferedReader(new FileReader(DataFile))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     existingData.add(line);
-                    // ch
+                    // check if the employee number is already existing
                     if (line.startsWith(newEmpNumber + ",")) {
                         // Message dialog if the employee already exists
                         JOptionPane.showMessageDialog(NewEmployee,

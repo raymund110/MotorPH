@@ -39,7 +39,6 @@ public class EmployeeDetails extends JFrame{
     private JLabel lblNetSalary;
     private JButton btnCompute;
     private JComboBox cbxMonths;
-    private JButton btnBack;
     private JLabel lblSalaryMonth;
 
     private String selectedMonth = "January"; // Default selection of month
@@ -47,20 +46,20 @@ public class EmployeeDetails extends JFrame{
     public EmployeeDetails (String selectedEmployee) {
         this.setContentPane(this.panelEmpDetails);
         this.setTitle("MotorPH");
-        this.setSize(850,700);
+        this.setSize(850,750);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        // confirmation on closing the window
+        // confirmation on closing the frame
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 int option = JOptionPane.showConfirmDialog(EmployeeDetails.this,
-                        "Are you sure you want to close MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                        "Exit on viewing employee details?", "Confirmation", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
                     dispose();
-                    System.exit(0);
+                    new MainFrame(); // goes back to the main frame
                 }
             }
         });
@@ -73,19 +72,6 @@ public class EmployeeDetails extends JFrame{
 
         employeeInfo(selectedEmployee);
 
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int option = JOptionPane.showConfirmDialog(EmployeeDetails.this,
-                        "Are sure you want to go back?", "Confirmation", JOptionPane.YES_NO_OPTION);
-
-                if (option == 0) {
-                    new MainFrame();
-                    dispose();
-                }
-
-            }
-        });
         // To save the selected month using combo box
         cbxMonths.addActionListener(new ActionListener() {
             @Override
@@ -119,7 +105,7 @@ public class EmployeeDetails extends JFrame{
         // iterates through the (employees) array list
         for (Employee emp : employees) {
             if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(selectedEmployeeNumber)) {
-                // if not null and employee number match: then an employee object is stored in searchedEmployee
+                // if not null and employee number match: then an employee object is stored in employeeData
                 employeeData = emp;
                 break;
             }
@@ -169,7 +155,7 @@ public class EmployeeDetails extends JFrame{
         // iterates through the (employees) array list
         for (Employee emp : employees) {
             if (emp != null && String.valueOf(emp.getEmployeeNumber()).equals(selectedEmployee)) {
-                // if not null and employee number match: then an employee object is stored in searchedEmployee
+                // if not null and employee number match: then an employee object is stored in employee
                 employee = emp;
                 break;
             }
@@ -234,7 +220,6 @@ public class EmployeeDetails extends JFrame{
             double hoursWork = Duration.between(timeIn, timeOut).toMinutes() / 60.0;
             totalHoursWorked += hoursWork; // add hourswork to total hours worked
         }
-
         return totalHoursWorked;
     }
 
@@ -267,8 +252,8 @@ public class EmployeeDetails extends JFrame{
 
             LocalDate endDate = startDate.withDayOfMonth(
                     startDate.getMonth().length(startDate.isLeapYear()));
-
             return new LocalDate[]{startDate, endDate};
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

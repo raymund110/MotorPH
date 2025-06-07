@@ -2,7 +2,6 @@ package com.motorph;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

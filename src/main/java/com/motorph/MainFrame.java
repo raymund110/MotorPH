@@ -12,6 +12,8 @@ public class MainFrame extends JFrame {
     private JButton btnViewEmployee;
     private JButton btnNewEmployee;
     private JButton btnLogout;
+    private JButton btnUpdate;
+    private JButton btnDelete;
 
     private String selectedEmployee; // Placeholder for current selected employee
 

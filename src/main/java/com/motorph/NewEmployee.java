@@ -29,7 +29,6 @@ public class NewEmployee extends JFrame{
     private JTextField txtGrossSemi;
     private JTextField txtHourlyRate;
     private JButton btnSaveEmployee;
-    private JButton btnBack;
     private JComboBox cbxStatus;
 
     public NewEmployee () {
@@ -38,17 +37,17 @@ public class NewEmployee extends JFrame{
         this.setSize(800,650);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        // confirmation on closing the window
+        // confirmation on closing the frame
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
                 int option = JOptionPane.showConfirmDialog(NewEmployee.this,
-                        "Are you sure you want to close MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                        "Exit on creating new employee details?", "Confirmation", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
                     dispose();
-                    System.exit(0);
+                    new MainFrame(); // goes back to the main frame
                 }
             }
         });
@@ -61,19 +60,6 @@ public class NewEmployee extends JFrame{
         // Placeholders for input formats
         placeholders();
 
-        // Go back to the main frame
-        btnBack.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int option = JOptionPane.showConfirmDialog(NewEmployee.this,
-                        "Are sure you want to go back?", "Confirmation", JOptionPane.YES_NO_OPTION);
-
-                if (option == 0) {
-                    dispose();
-                    new MainFrame();
-                }
-            }
-        });
         // Save button
         btnSaveEmployee.addActionListener(new ActionListener() {
             @Override
@@ -122,7 +108,7 @@ public class NewEmployee extends JFrame{
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        try { //Checking validity of numerical inputs
+        try { //Checking the validity of numerical inputs
             Integer.parseInt(txtEmployeeNumber.getText().trim());
             Double.parseDouble(txtBasicSalary.getText().trim());
             Double.parseDouble(txtRiceSubsidy.getText().trim());
@@ -181,6 +167,7 @@ public class NewEmployee extends JFrame{
                 + "," + basicSalary + "," + riceSubsidy + "," + phoneAllowance
                 + "," + clothingAllowance + "," + grossSemi + "," + hourlyRate;
     }
+
     // Placeholders for users to know the important formats
     private void placeholders () {
         // Birthday placeholder

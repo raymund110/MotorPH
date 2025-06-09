@@ -76,8 +76,7 @@ public class EmployeeDataFile {
                     CSVWriter.DEFAULT_QUOTE_CHARACTER,
                     CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                     CSVWriter.DEFAULT_LINE_END)) {
-//                writer.newLine();
-//                writer.append(employeeData);
+
                 // Convert the employeeData string to array
                 String[] employeeFields = employeeData.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 writer.writeNext(employeeFields);
@@ -87,6 +86,135 @@ public class EmployeeDataFile {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Error saving employee data: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+    // Update existing employee data in the file
+    public boolean updateEmployee(String employeeNumber, JFrame UpdateEmployee, Employee updatedEmployee) {
+        try {
+            ArrayList<String[]> updatedData = new ArrayList<>();
+            boolean employeeFound = false;
+
+            // Read the existing data from the file
+            try (CSVReader reader = new CSVReaderBuilder(new FileReader(DataFile))
+                    .withCSVParser(parser).build()) {
+
+                // Store header
+                updatedData.add(reader.readNext());
+                String[] line;
+
+                // Read and store all lines, updating the matching employee
+                while ((line = reader.readNext()) != null) {
+                    if (line[0].trim().equals(employeeNumber)) {
+                        employeeFound = true;
+                        updatedData.add(new String[]{
+                                String.valueOf(updatedEmployee.getEmployeeNumber()),
+                                updatedEmployee.getPerson().getLastName(),
+                                updatedEmployee.getPerson().getFirstName(),
+                                updatedEmployee.getBirthday().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")),
+                                updatedEmployee.getContactInfo().getAddress(),
+                                updatedEmployee.getContactInfo().getPhoneNumber(),
+                                updatedEmployee.getGovID().getsssID(),
+                                updatedEmployee.getGovID().getphilhealthID(),
+                                updatedEmployee.getGovID().gettinID(),
+                                updatedEmployee.getGovID().getpagibigID(),
+                                updatedEmployee.getStatus(),
+                                updatedEmployee.getJob().getPosition(),
+                                updatedEmployee.getJob().getSupervisor(),
+                                String.format("%.2f", updatedEmployee.getCompensation().getBasicSalary()),
+                                String.format("%.2f", updatedEmployee.getCompensation().getRiceSubsidy()),
+                                String.format("%.2f", updatedEmployee.getCompensation().getPhoneAllowance()),
+                                String.format("%.2f", updatedEmployee.getCompensation().getClothingAllowance()),
+                                String.format("%.2f", updatedEmployee.getCompensation().getGrossSemiMonthlyRate()),
+                                String.format("%.2f", updatedEmployee.getCompensation().getHourlyRate())
+
+                        });
+                    } else {
+                        updatedData.add(line);
+                    }
+                }
+            }
+
+            if (!employeeFound) {
+                JOptionPane.showMessageDialog(UpdateEmployee,
+                        "Employee not found!",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+
+            // Write all data back to the file
+            try (CSVWriter writer = new CSVWriter(new FileWriter(DataFile),
+                    CSVWriter.DEFAULT_SEPARATOR,
+                    CSVWriter.DEFAULT_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END)) {
+
+                writer.writeAll(updatedData);
+                JOptionPane.showMessageDialog(UpdateEmployee,
+                        "Employee information updated successfully!",
+                        "Success", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error updating employee data: " + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+    // Delete the selected employee from the table
+    public boolean deleteEmployee(String employeeNumber, JFrame frame) {
+        try {
+            ArrayList<String[]> remainingData = new ArrayList<>();
+            boolean employeeFound = false;
+
+            // Read all existing data except the one to be deleted
+            try (CSVReader reader = new CSVReaderBuilder(new FileReader(DataFile))
+                    .withCSVParser(parser).build()) {
+
+                // Store header
+                remainingData.add(reader.readNext());
+                String[] line;
+
+                while ((line = reader.readNext()) != null) {
+                    if (line[0].trim().equals(employeeNumber)) {
+                        employeeFound = true;
+                    } else {
+                        remainingData.add(line);
+                    }
+                }
+            }
+
+            if (!employeeFound) {
+                JOptionPane.showMessageDialog(frame,
+                        "Employee not found!",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
+            // Write remaining data back to the file
+            try (CSVWriter writer = new CSVWriter(new FileWriter(DataFile),
+                    CSVWriter.DEFAULT_SEPARATOR,
+                    CSVWriter.DEFAULT_QUOTE_CHARACTER,
+                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                    CSVWriter.DEFAULT_LINE_END)) {
+
+                writer.writeAll(remainingData);
+                JOptionPane.showMessageDialog(frame,
+                        "Employee deleted successfully!",
+                        "Success", JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(frame,
+                    "Error deleting employee data: " + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }

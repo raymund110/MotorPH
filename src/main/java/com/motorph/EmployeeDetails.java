@@ -60,7 +60,6 @@ public class EmployeeDetails extends JFrame{
                 dispose();
             }
         });
-//        this.requestFocusInWindow();
 
         // Logo Config
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");

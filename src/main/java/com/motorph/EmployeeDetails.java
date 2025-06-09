@@ -40,6 +40,7 @@ public class EmployeeDetails extends JFrame{
     private JButton btnCompute;
     private JComboBox cbxMonths;
     private JLabel lblSalaryMonth;
+    private JButton btnBack;
 
     private String selectedMonth = "January"; // Default selection of month
 
@@ -55,14 +56,11 @@ public class EmployeeDetails extends JFrame{
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                int option = JOptionPane.showConfirmDialog(EmployeeDetails.this,
-                        "Exit on viewing employee details?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                if (option == 0) {
-                    dispose();
-                    new MainFrame(); // goes back to the main frame
-                }
+                new MainFrame();
+                dispose();
             }
         });
+//        this.requestFocusInWindow();
 
         // Logo Config
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
@@ -71,6 +69,14 @@ public class EmployeeDetails extends JFrame{
         this.setVisible(true);
 
         employeeInfo(selectedEmployee);
+
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainFrame();
+                dispose();
+            }
+        });
 
         // To save the selected month using combo box
         cbxMonths.addActionListener(new ActionListener() {
@@ -96,7 +102,7 @@ public class EmployeeDetails extends JFrame{
     }
 
     private void employeeInfo (String selectedEmployeeNumber) {
-        EmployeeDataFromFile employeeDataFromFile = new EmployeeDataFromFile();
+        EmployeeDataFile employeeDataFromFile = new EmployeeDataFile();
         ArrayList<Employee> employees = employeeDataFromFile.getEmployeeData();
 
         // Placeholder remains null if the selected employee is not found
@@ -144,9 +150,9 @@ public class EmployeeDetails extends JFrame{
     // Compute salary based on the selected month
     private void computeSalary (String selectedEmployee, String selectedMonth) {
         // Initialized the attendance and employee objects
-        EmployeeDataFromFile employeeDataFromFile = new EmployeeDataFromFile();
+        EmployeeDataFile employeeDataFromFile = new EmployeeDataFile();
         ArrayList<Employee> employees = employeeDataFromFile.getEmployeeData();
-        AttendanceDataFromFile attendanceDataFromFile = new AttendanceDataFromFile();
+        AttendanceDataFile attendanceDataFromFile = new AttendanceDataFile();
         ArrayList<Attendance> attendances = attendanceDataFromFile.getAttendanceData();
 
         double totalHoursWorked = 0.0;

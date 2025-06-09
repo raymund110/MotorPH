@@ -30,6 +30,7 @@ public class NewEmployee extends JFrame{
     private JTextField txtHourlyRate;
     private JButton btnSaveEmployee;
     private JComboBox cbxStatus;
+    private JButton btnBack;
 
     public NewEmployee () {
         this.setContentPane(this.pnlNewEmployee);
@@ -43,12 +44,8 @@ public class NewEmployee extends JFrame{
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                int option = JOptionPane.showConfirmDialog(NewEmployee.this,
-                        "Exit on creating new employee details?", "Confirmation", JOptionPane.YES_NO_OPTION);
-                if (option == 0) {
-                    dispose();
-                    new MainFrame(); // goes back to the main frame
-                }
+                new MainFrame();
+                dispose();
             }
         });
 
@@ -65,8 +62,8 @@ public class NewEmployee extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validateInputs()) { // If inputs are valid
-                    EmployeeDataFromFile employeeData = new EmployeeDataFromFile();
-                    // process the saving of employee data to the CSV file using the EmployeeDataFromFile
+                    EmployeeDataFile employeeData = new EmployeeDataFile();
+                    // process the saving of employee data to the CSV file using the EmployeeDataFile
                     boolean saved = employeeData.addNewEmployee(saveEmployee(), NewEmployee.this);
                     if (saved) { // message to the user if addNewEmployee method returns true
                         JOptionPane.showMessageDialog(NewEmployee.this,
@@ -79,8 +76,15 @@ public class NewEmployee extends JFrame{
                 }
             }
         });
-        pnlNewEmployee.addComponentListener(new ComponentAdapter() {
+
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MainFrame();
+                dispose();
+            }
         });
+
     }
     // validating all input formats
     private boolean validateInputs () {

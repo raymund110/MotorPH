@@ -108,8 +108,8 @@ public class MainFrame extends JFrame {
     // Loads the employee table
     private void employeeTable () {
         // Instantiate Employee
-        EmployeeDataFromFile dataFile = new EmployeeDataFromFile(); //
-        // Retrieves the ArrayList of Employee objects from EmployeeDataFromFile
+        EmployeeDataFile dataFile = new EmployeeDataFile(); //
+        // Retrieves the ArrayList of Employee objects from EmployeeDataFile
         ArrayList<Employee> employee = dataFile.getEmployeeData(); // Store Employee Objects
 
         // Column Names

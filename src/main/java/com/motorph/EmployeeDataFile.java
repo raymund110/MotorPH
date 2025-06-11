@@ -78,7 +78,7 @@ public class EmployeeDataFile {
                     CSVWriter.DEFAULT_LINE_END)) {
 
                 // Convert the employeeData string to array
-                String[] employeeFields = employeeData.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+                String[] employeeFields = employeeData.split(",");
                 writer.writeNext(employeeFields);
                 return true;
             }

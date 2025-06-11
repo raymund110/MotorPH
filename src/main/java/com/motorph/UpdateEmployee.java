@@ -40,9 +40,12 @@ public class UpdateEmployee extends JFrame{
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                new MainFrame();
-                dispose();
+                int option = JOptionPane.showConfirmDialog(UpdateEmployee.this,
+                        "Are you sure you want to close Update Employee Window", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    new MainFrame();
+                    dispose();
+                }
             }
         });
 
@@ -56,8 +59,12 @@ public class UpdateEmployee extends JFrame{
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MainFrame();
-                dispose();
+                int option = JOptionPane.showConfirmDialog(UpdateEmployee.this,
+                        "Are you sure you want to go back to Main MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    new MainFrame();
+                    dispose();
+                }
             }
         });
 
@@ -125,6 +132,13 @@ public class UpdateEmployee extends JFrame{
         }
     }
 
+    // parse money input
+    private double moneyInputs(String money) {
+        // Remove peso sign spaces, and commas
+        String cleaningInputs = money.replace("₱", "").replace(" ", "").replace(",", "");
+        return Double.parseDouble(cleaningInputs);
+    }
+
     private void employeeChanges () {
         try {
             // Create a new Employee object with updated information
@@ -160,20 +174,12 @@ public class UpdateEmployee extends JFrame{
             govID.setpagibigID(txtPagibigNumber.getText());
             updatedEmployee.setGovID(govID);
 
-            // Remove currency symbol and formatting for parsing
-            String basicSalary = txtBasicSalary.getText().replace("₱", "").replace(",", "").trim();
-            String riceSubsidy = txtRiceSubsidy.getText().replace("₱", "").replace(",", "").trim();
-            String phoneAllowance = txtPhoneAllowance.getText().replace("₱", "").replace(",", "").trim();
-            String clothingAllowance = txtClothingAllowance.getText().replace("₱", "").replace(",", "").trim();
-            String grossSemi = txtGrossSemi.getText().replace("₱", "").replace(",", "").trim();
-            String hourlyRate = txtHourlyRate.getText().replace("₱", "").replace(",", "").trim();
-
-            compensation.setBasicSalary(Double.parseDouble(basicSalary));
-            compensation.setRiceSubsidy(Double.parseDouble(riceSubsidy));
-            compensation.setPhoneAllowance(Double.parseDouble(phoneAllowance));
-            compensation.setClothingAllowance(Double.parseDouble(clothingAllowance));
-            compensation.setGrossSemiMonthlyRate(Double.parseDouble(grossSemi));
-            compensation.setHourlyRate(Double.parseDouble(hourlyRate));
+            compensation.setBasicSalary(moneyInputs(txtBasicSalary.getText()));
+            compensation.setRiceSubsidy(moneyInputs(txtRiceSubsidy.getText()));
+            compensation.setPhoneAllowance(moneyInputs(txtPhoneAllowance.getText()));
+            compensation.setClothingAllowance(moneyInputs(txtClothingAllowance.getText()));
+            compensation.setGrossSemiMonthlyRate(moneyInputs(txtGrossSemi.getText()));
+            compensation.setHourlyRate(moneyInputs(txtHourlyRate.getText()));
             updatedEmployee.setCompensation(compensation);
 
             // Call the update function

@@ -55,9 +55,12 @@ public class EmployeeDetails extends JFrame{
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                new MainFrame();
-                dispose();
+                int option = JOptionPane.showConfirmDialog(EmployeeDetails.this,
+                        "Are you sure you want to close Employee Details Window", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    new MainFrame();
+                    dispose();
+                }
             }
         });
 
@@ -72,8 +75,12 @@ public class EmployeeDetails extends JFrame{
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MainFrame();
-                dispose();
+                int option = JOptionPane.showConfirmDialog(EmployeeDetails.this,
+                        "Are you sure you want to go back to Main MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    new MainFrame();
+                    dispose();
+                }
             }
         });
 

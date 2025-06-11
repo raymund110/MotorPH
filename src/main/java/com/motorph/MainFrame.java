@@ -51,7 +51,6 @@ public class MainFrame extends JFrame {
         tableEmployeeList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
                 int row = tableEmployeeList.getSelectedRow(); // get selected row index
                 DefaultTableModel model = (DefaultTableModel)tableEmployeeList.getModel();
                 // get EmployeeNumber(column 0) from the selected row

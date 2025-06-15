@@ -30,6 +30,7 @@ public class NewEmployee extends JFrame{
     private JTextField txtHourlyRate;
     private JButton btnSaveEmployee;
     private JComboBox cbxStatus;
+    private JButton btnBack;
 
     public NewEmployee () {
         this.setContentPane(this.pnlNewEmployee);
@@ -42,12 +43,11 @@ public class NewEmployee extends JFrame{
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
                 int option = JOptionPane.showConfirmDialog(NewEmployee.this,
-                        "Exit on creating new employee details?", "Confirmation", JOptionPane.YES_NO_OPTION);
+                        "Are you sure you want to close New Employee window", "Confirmation", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
+                    new MainFrame();
                     dispose();
-                    new MainFrame(); // goes back to the main frame
                 }
             }
         });
@@ -57,16 +57,27 @@ public class NewEmployee extends JFrame{
         this.setIconImage(logo.getImage());
 
         this.setVisible(true);
-        // Placeholders for input formats
-        placeholders();
+        // Placeholders for users to know the important formats
+        basicPlaceholder(txtBirthday, "MM/dd/yyyy");
+        basicPlaceholder(txtSupervisor, "Last Name, FIrst Name");
+        basicPlaceholder(txtPhoneNumber, "000-000-000");
+        basicPlaceholder(txtSSSNumber, "00-0000000-0");
+        basicPlaceholder(txtTINNumber, "000-000-000-000");
+
+        moneyPlaceholder(txtBasicSalary, "₱ 00,000,00");
+        moneyPlaceholder(txtRiceSubsidy, "₱ 0,000,00");
+        moneyPlaceholder(txtPhoneAllowance, "₱ 0,000,00");
+        moneyPlaceholder(txtClothingAllowance, "₱ 0,000,00");
+        moneyPlaceholder(txtGrossSemi, "₱ 00,000,00");
+        moneyPlaceholder(txtHourlyRate, "₱ 000,00");
 
         // Save button
         btnSaveEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (validateInputs()) { // If inputs are valid
-                    EmployeeDataFromFile employeeData = new EmployeeDataFromFile();
-                    // process the saving of employee data to the CSV file using the EmployeeDataFromFile
+                    EmployeeDataFile employeeData = new EmployeeDataFile();
+                    // process the saving of employee data to the CSV file using the EmployeeDataFile
                     boolean saved = employeeData.addNewEmployee(saveEmployee(), NewEmployee.this);
                     if (saved) { // message to the user if addNewEmployee method returns true
                         JOptionPane.showMessageDialog(NewEmployee.this,
@@ -79,8 +90,19 @@ public class NewEmployee extends JFrame{
                 }
             }
         });
-        pnlNewEmployee.addComponentListener(new ComponentAdapter() {
+
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(NewEmployee.this,
+                        "Are you sure you want to go back to Main MotorPH Window", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (option == 0) {
+                    new MainFrame();
+                    dispose();
+                }
+            }
         });
+
     }
     // validating all input formats
     private boolean validateInputs () {
@@ -110,12 +132,13 @@ public class NewEmployee extends JFrame{
         }
         try { //Checking the validity of numerical inputs
             Integer.parseInt(txtEmployeeNumber.getText().trim());
-            Double.parseDouble(txtBasicSalary.getText().trim());
-            Double.parseDouble(txtRiceSubsidy.getText().trim());
-            Double.parseDouble(txtPhoneAllowance.getText().trim());
-            Double.parseDouble(txtClothingAllowance.getText().trim());
-            Double.parseDouble(txtGrossSemi.getText().trim());
-            Double.parseDouble(txtHourlyRate.getText().trim());
+
+            moneyInputs(txtBasicSalary.getText());
+            moneyInputs(txtRiceSubsidy.getText());
+            moneyInputs(txtPhoneAllowance.getText());
+            moneyInputs(txtClothingAllowance.getText());
+            moneyInputs(txtGrossSemi.getText());
+            moneyInputs(txtHourlyRate.getText());
             // Add more numeric validations as needed
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(NewEmployee.this,
@@ -127,141 +150,92 @@ public class NewEmployee extends JFrame{
 
         return true; // inputs are valid
     }
+
+    // parse money input
+    private double moneyInputs(String money) {
+        // Remove peso sign spaces, and commas
+        String cleaningInputs = money.replace("₱", "").replace(" ", "").replace(",", "");
+        return Double.parseDouble(cleaningInputs);
+    }
+
     // Save employee data inputs
-    public String saveEmployee () {
+    public String[] saveEmployee () {
         // Basic info
-        String empNumber = String.valueOf(txtEmployeeNumber.getText());
-        String lastName = String.valueOf(txtLastName.getText());
-        String firstName = String.valueOf(txtFirstName.getText());
-        String birthday = String.valueOf(txtBirthday.getText());
+        String empNumber = (txtEmployeeNumber.getText());
+        String lastName = (txtLastName.getText());
+        String firstName = (txtFirstName.getText());
+        String birthday = (txtBirthday.getText());
         // Contact info
-        String address = "\"" + txtAddress.getText() + "\"";
+        String address = txtAddress.getText();
         String phoneNumber = txtPhoneNumber.getText();
         // GOV ID
-        String sssID = String.valueOf(txtSSSNumber.getText());
-        String philhealthID = String.valueOf(txtPhilhealthNumber.getText());
-        String tinID = String.valueOf(txtTINNumber.getText());
-        String pagibigID = String.valueOf(txtPagibigNumber.getText());
+        String sssID = (txtSSSNumber.getText());
+        String philhealthID = (txtPhilhealthNumber.getText());
+        String tinID = (txtTINNumber.getText());
+        String pagibigID = (txtPagibigNumber.getText());
         // Job
         String status = String.valueOf(cbxStatus.getSelectedItem());
         String position = txtPosition.getText();
-        String supervisor = "\"" + txtSupervisor.getText() + "\"";
+        String supervisor = txtSupervisor.getText();
 
         // Compensation
         // Decimael formatter to match the csv text
-        DecimalFormat salaryFormat = new DecimalFormat("#,###");
-        DecimalFormat hourlyFormat = new DecimalFormat("#,##0.00");
+        DecimalFormat salaryFormat = new DecimalFormat("#,###"); // No decimal points
+        DecimalFormat hourlyFormat = new DecimalFormat("#,##0.00"); // With decimal points
 
-        String basicSalary = "\"" + salaryFormat.format(Double.parseDouble(txtBasicSalary.getText())) + "\"";
-        String riceSubsidy = "\"" + salaryFormat.format(Double.parseDouble(txtRiceSubsidy.getText())) + "\"";
-        String phoneAllowance = "\"" + salaryFormat.format(Double.parseDouble(txtPhoneAllowance.getText())) + "\"";
-        String clothingAllowance = "\"" + salaryFormat.format(Double.parseDouble(txtClothingAllowance.getText())) + "\"";
-        String grossSemi = "\"" + salaryFormat.format(Double.parseDouble(txtGrossSemi.getText())) + "\"";
+        String basicSalary = salaryFormat.format(moneyInputs(txtBasicSalary.getText()));
+        String riceSubsidy = salaryFormat.format(moneyInputs(txtRiceSubsidy.getText()));
+        String phoneAllowance = salaryFormat.format(moneyInputs(txtPhoneAllowance.getText()));
+        String clothingAllowance = salaryFormat.format(moneyInputs(txtClothingAllowance.getText()));
+        String grossSemi = salaryFormat.format(moneyInputs(txtGrossSemi.getText()));
+        String hourlyRate = hourlyFormat.format(moneyInputs(txtHourlyRate.getText()));
 
-        String hourlyRate = hourlyFormat.format(Double.parseDouble(txtHourlyRate.getText()));
-
-        return empNumber + "," + lastName + "," + firstName  + "," + birthday
-                + "," + address + "," + phoneNumber + "," +
-                sssID + "," + philhealthID + "," + tinID + "," + pagibigID
-                + "," + status + "," + position + "," + supervisor
-                + "," + basicSalary + "," + riceSubsidy + "," + phoneAllowance
-                + "," + clothingAllowance + "," + grossSemi + "," + hourlyRate;
+        return new String[]{empNumber, lastName, firstName, birthday
+                , address, phoneNumber, sssID, philhealthID, tinID, pagibigID, status, position, supervisor,
+                basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, grossSemi, hourlyRate};
     }
 
-    // Placeholders for users to know the important formats
-    private void placeholders () {
-        // Birthday placeholder
-        txtBirthday.addFocusListener(new FocusAdapter() {
+    // Placeholder method for basic information format
+    private void basicPlaceholder (JTextField textField, String placeholder) {
+        textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                if (txtBirthday.getText().equals("MM/dd/yyyy")) {
-                    txtBirthday.setText("");
-                    txtBirthday.setForeground(Color.BLACK);
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if (txtBirthday.getText().isEmpty()) {
-                    txtBirthday.setText("MM/dd/yyyy");
-                    txtBirthday.setForeground(Color.GRAY);
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeholder);
+                    textField.setForeground(Color.GRAY);
                 }
             }
         });
-        // Supervisor placeholder
-        txtSupervisor.addFocusListener(new FocusAdapter() {
+    }
+
+    // Placeholder method for money format
+    private void moneyPlaceholder(JTextField textField, String placeholder) {
+        textField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                if (txtSupervisor.getText().equals("Last Name, FIrst Name")) {
-                    txtSupervisor.setText("");
-                    txtSupervisor.setForeground(Color.BLACK);
+                if (textField.getText().equals(placeholder)) {
+                    textField.setText("₱ ");
+                    textField.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if (txtSupervisor.getText().isEmpty()) {
-                    txtSupervisor.setText("Last Name, FIrst Name");
-                    txtSupervisor.setForeground(Color.GRAY);
+                // If peso value was not set
+                if (textField.getText().equals("₱ ")) {
+                    textField.setText("");
                 }
-            }
-        });
-        // Phone number placeholder
-        txtPhoneNumber.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                if (txtPhoneNumber.getText().equals("000-000-000")) {
-                    txtPhoneNumber.setText("");
-                    txtPhoneNumber.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                if (txtPhoneNumber.getText().isEmpty()) {
-                    txtPhoneNumber.setText("000-000-000");
-                    txtPhoneNumber.setForeground(Color.GRAY);
-                }
-            }
-        });
-        // SSS number placeholder
-        txtSSSNumber.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                if (txtSSSNumber.getText().equals("00-0000000-0")) {
-                    txtSSSNumber.setText("");
-                    txtSSSNumber.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                if (txtSSSNumber.getText().isEmpty()) {
-                    txtSSSNumber.setText("00-0000000-0");
-                    txtSSSNumber.setForeground(Color.GRAY);
-                }
-            }
-        });
-        // TIN number placeholder
-        txtTINNumber.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                super.focusGained(e);
-                if (txtTINNumber.getText().equals("000-000-000-000")) {
-                    txtTINNumber.setText("");
-                    txtTINNumber.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                if (txtTINNumber.getText().isEmpty()) {
-                    txtTINNumber.setText("000-000-000-000");
-                    txtTINNumber.setForeground(Color.GRAY);
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeholder);
+                    textField.setForeground(Color.GRAY);
                 }
             }
         });

@@ -12,8 +12,8 @@ public class MainFrame extends JFrame {
     private JButton btnViewEmployee;
     private JButton btnNewEmployee;
     private JButton btnLogout;
-    private JButton btnUpdate;
-    private JButton btnDelete;
+    private JButton btnUpdateEmployee;
+    private JButton btnDeleteEmployee;
 
     private String selectedEmployee; // Placeholder for current selected employee
 
@@ -51,12 +51,14 @@ public class MainFrame extends JFrame {
         tableEmployeeList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
                 int row = tableEmployeeList.getSelectedRow(); // get selected row index
                 DefaultTableModel model = (DefaultTableModel)tableEmployeeList.getModel();
                 // get EmployeeNumber(column 0) from the selected row
                 selectedEmployee = model.getValueAt(row, 0).toString();
-                btnViewEmployee.setEnabled(true); // Make view employee clickable
+                // Make these buttons clickable
+                btnViewEmployee.setEnabled(true);
+                btnUpdateEmployee.setEnabled(true);
+                btnDeleteEmployee.setEnabled(true);
             }
         });
 
@@ -64,15 +66,8 @@ public class MainFrame extends JFrame {
         btnViewEmployee.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                if (selectedEmployee != null) {
-                    new EmployeeDetails(selectedEmployee);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(MainFrame.this,
-                            "Select an employee on the table first.",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                new EmployeeDetails(selectedEmployee);
+                dispose();
 
             }
         });
@@ -103,13 +98,52 @@ public class MainFrame extends JFrame {
                 }
             }
         });
+        // Update Employee
+        btnUpdateEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(MainFrame.this,
+                        "Are you sure you want to update the selected employee?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+                if (option == 0) {
+                    new UpdateEmployee(selectedEmployee);
+                    dispose();
+                }
+            }
+        });
+
+        btnDeleteEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(MainFrame.this,
+                        "Are you sure you want to delete this employee?\nThis action cannot be undone.",
+                        "Confirm Delete", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE);
+
+                if (option == 0) {
+                    EmployeeDataFile employeeDataFile = new EmployeeDataFile();
+                    if (employeeDataFile.deleteEmployee(selectedEmployee, MainFrame.this)) {
+                        // Refresh the table
+                        employeeTable();
+                        // Reset selection and disable buttons
+                        selectedEmployee = null;
+                        btnViewEmployee.setEnabled(false);
+                        btnUpdateEmployee.setEnabled(false);
+                        btnDeleteEmployee.setEnabled(false);
+                    }
+
+                }
+
+            }
+        });
+
     }
 
     // Loads the employee table
     private void employeeTable () {
         // Instantiate Employee
-        EmployeeDataFromFile dataFile = new EmployeeDataFromFile(); //
-        // Retrieves the ArrayList of Employee objects from EmployeeDataFromFile
+        EmployeeDataFile dataFile = new EmployeeDataFile(); //
+        // Retrieves the ArrayList of Employee objects from EmployeeDataFile
         ArrayList<Employee> employee = dataFile.getEmployeeData(); // Store Employee Objects
 
         // Column Names

@@ -9,6 +9,7 @@ import com.opencsv.CSVWriter;
 import javax.swing.*;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -49,9 +50,9 @@ public class EmployeeDataFile {
     }
 
     // Add new employee data to the file. Returning boolean value for showing diaglog
-    public boolean addNewEmployee (String employeeData, JFrame NewEmployee) {
+    public boolean addNewEmployee (String[] employeeData, JFrame NewEmployee) {
         try {
-            String newEmpNumber = employeeData.split(",")[0].trim();
+            String newEmpNumber = employeeData[0].trim();
             // Read the existing file to check the duplicate employee number
             try (CSVReader reader = new CSVReaderBuilder(new FileReader(DataFile))
                     .withCSVParser(parser).build()) {
@@ -71,15 +72,8 @@ public class EmployeeDataFile {
                 }
             }
             // Append new employee data
-            try (CSVWriter writer = new CSVWriter(new FileWriter(DataFile, true),
-                    CSVWriter.DEFAULT_SEPARATOR,
-                    CSVWriter.DEFAULT_QUOTE_CHARACTER,
-                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                    CSVWriter.DEFAULT_LINE_END)) {
-
-                // Convert the employeeData string to array
-                String[] employeeFields = employeeData.split(",");
-                writer.writeNext(employeeFields);
+            try (CSVWriter writer = new CSVWriter(new FileWriter(DataFile, true))) {
+                writer.writeNext(employeeData);
                 return true;
             }
 
@@ -105,6 +99,10 @@ public class EmployeeDataFile {
                 updatedData.add(reader.readNext());
                 String[] line;
 
+                // Decimael formatter to match the csv text
+                DecimalFormat salaryFormat = new DecimalFormat("#,###"); // No decimal points
+                DecimalFormat hourlyFormat = new DecimalFormat("#,##0.00"); // With decimal points
+
                 // Read and store all lines, updating the matching employee
                 while ((line = reader.readNext()) != null) {
                     if (line[0].trim().equals(employeeNumber)) {
@@ -123,12 +121,12 @@ public class EmployeeDataFile {
                                 updatedEmployee.getStatus(),
                                 updatedEmployee.getJob().getPosition(),
                                 updatedEmployee.getJob().getSupervisor(),
-                                String.format("%.2f", updatedEmployee.getCompensation().getBasicSalary()),
-                                String.format("%.2f", updatedEmployee.getCompensation().getRiceSubsidy()),
-                                String.format("%.2f", updatedEmployee.getCompensation().getPhoneAllowance()),
-                                String.format("%.2f", updatedEmployee.getCompensation().getClothingAllowance()),
-                                String.format("%.2f", updatedEmployee.getCompensation().getGrossSemiMonthlyRate()),
-                                String.format("%.2f", updatedEmployee.getCompensation().getHourlyRate())
+                                salaryFormat.format(updatedEmployee.getCompensation().getBasicSalary()),
+                                salaryFormat.format(updatedEmployee.getCompensation().getRiceSubsidy()),
+                                salaryFormat.format(updatedEmployee.getCompensation().getPhoneAllowance()),
+                                salaryFormat.format(updatedEmployee.getCompensation().getClothingAllowance()),
+                                salaryFormat.format(updatedEmployee.getCompensation().getGrossSemiMonthlyRate()),
+                                hourlyFormat.format(updatedEmployee.getCompensation().getHourlyRate())
 
                         });
                     } else {

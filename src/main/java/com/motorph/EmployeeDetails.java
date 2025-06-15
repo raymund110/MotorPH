@@ -75,12 +75,8 @@ public class EmployeeDetails extends JFrame{
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int option = JOptionPane.showConfirmDialog(EmployeeDetails.this,
-                        "Are you sure you want to go back to Main MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
-                if (option == 0) {
-                    new MainFrame();
-                    dispose();
-                }
+                new MainFrame();
+                dispose();
             }
         });
 
@@ -182,7 +178,10 @@ public class EmployeeDetails extends JFrame{
             }
 
             // Calculate the gross based on hours worked
-            double gross = totalHoursWorked * employee.getCompensation().getHourlyRate();
+            double totalAllowance = employee.getCompensation().getRiceSubsidy()
+                    + employee.getCompensation().getPhoneAllowance()
+                    + employee.getCompensation().getClothingAllowance();
+            double gross = (totalHoursWorked * employee.getCompensation().getHourlyRate()) + totalAllowance;
             double deductions = employee.getSalaryDeduction()
                     .getTotalDeductions(employee.getCompensation().getBasicSalary());
             // Calculate netSalary

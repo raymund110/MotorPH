@@ -159,7 +159,7 @@ public class NewEmployee extends JFrame{
     }
 
     // Save employee data inputs
-    public String saveEmployee () {
+    public String[] saveEmployee () {
         // Basic info
         String empNumber = (txtEmployeeNumber.getText());
         String lastName = (txtLastName.getText());
@@ -190,9 +190,9 @@ public class NewEmployee extends JFrame{
         String grossSemi = salaryFormat.format(moneyInputs(txtGrossSemi.getText()));
         String hourlyRate = hourlyFormat.format(moneyInputs(txtHourlyRate.getText()));
 
-        return String.join(",", empNumber, lastName, firstName , birthday
-               , address, phoneNumber, sssID, philhealthID, tinID, pagibigID, status, position, supervisor,
-                basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, grossSemi, hourlyRate);
+        return new String[]{empNumber, lastName, firstName, birthday
+                , address, phoneNumber, sssID, philhealthID, tinID, pagibigID, status, position, supervisor,
+                basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, grossSemi, hourlyRate};
     }
 
     // Placeholder method for basic information format

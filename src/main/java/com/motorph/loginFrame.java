@@ -1,10 +1,13 @@
 package com.motorph;
 
+import com.opencsv.CSVReader;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileReader;
 
 public class loginFrame extends JFrame{
     private JTextField txtUser;
@@ -23,7 +26,6 @@ public class loginFrame extends JFrame{
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
                 int option = JOptionPane.showConfirmDialog(loginFrame.this,
                         "Are you sure you want to close MotorPH", "Confirmation", JOptionPane.YES_NO_OPTION);
                 if (option == 0) {
@@ -32,17 +34,15 @@ public class loginFrame extends JFrame{
                 }
             }
         });
-
         // Logo Config
         ImageIcon logo = new ImageIcon("src/main/resources/MotorPH-Logo.png");
         this.setIconImage(logo.getImage());
-
         this.setVisible(true);
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkingCridentials(); // run the checker
+                checkingCredentials(); // run the checker
             }
         });
 
@@ -57,28 +57,58 @@ public class loginFrame extends JFrame{
         psPassword.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkingCridentials(); // run the checker
+                checkingCredentials(); // run the checker
             }
         });
     }
 
-    // check cridentials if it matches the inputs
-    public void checkingCridentials () {
+    // check credentials if it matches the inputs
+    private void checkingCredentials () {
+        String loginData = "src/main/resources/LoginCredentials.csv"; // potential error here
         String userID = txtUser.getText();
         String passwordID = new String(psPassword.getPassword());
-        // Check if credintials is correct
-        if (userID.equals("Admin") && passwordID.equals("1234")) {
-            new MainFrame(); // if correct open main window
-            dispose(); // dispose login frame
-        }
-        else {
-            JOptionPane.showMessageDialog(loginFrame.this,
-                    "Invalid Cridential Try Again!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
-            // Clear the input fields
-            txtUser.setText("");
-            psPassword.setText("");
-            txtUser.requestFocus(); // Cursor focus on user input
+
+        try (CSVReader reader = new CSVReader(new FileReader(loginData))) {
+            String[] line;
+            boolean correct = false;
+
+            while ((line = reader.readNext()) != null) {
+                if (line.length >= 4) {
+                    String userName = line[2].trim();
+                    String userPass = line[3].trim();
+
+                    // Check if credintials is correct
+                    if (userID.equals(userName) && passwordID.equals(userPass)) {
+                        correct = true;
+                        break;
+                    }
+                }
+            }
+
+            if (correct) {
+                new MainFrame();
+                dispose();
+            }
+            else if (userID.isEmpty() && passwordID.isEmpty()) {
+                JOptionPane.showMessageDialog(loginFrame.this,
+                        "Login fields empty.\nEnter your credentials.", "Empty fields", JOptionPane.ERROR_MESSAGE);
+                txtUser.requestFocus();
+            }
+            else if (passwordID.isEmpty()) {
+                JOptionPane.showMessageDialog(loginFrame.this,
+                        "Please enter your password credentials.", "Empty passwords", JOptionPane.ERROR_MESSAGE);
+                psPassword.requestFocus();
+            }
+            else {
+                JOptionPane.showMessageDialog(loginFrame.this,
+                        "Invalid Credential Try Again!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                // Clear the input fields
+                txtUser.setText("");
+                psPassword.setText("");
+                txtUser.requestFocus(); // Cursor focus on user input
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading file: " + e.getMessage());
         }
     }
-
 }

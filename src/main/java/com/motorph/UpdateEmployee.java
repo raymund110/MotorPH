@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class UpdateEmployee extends JFrame{
     private JPanel pnlUpdateEmployee;
-    private JTextField txtEmployeeNumber;
+    private JLabel lblEmployeeNumber;
     private JTextField txtFirstName;
     private JTextField txtBirthday;
     private JTextField txtLastName;
@@ -95,7 +95,7 @@ public class UpdateEmployee extends JFrame{
 
         if (employeeData != null) {
             // Basic Information
-            txtEmployeeNumber.setText(String.valueOf(employeeData.getEmployeeNumber()));
+            lblEmployeeNumber.setText(String.valueOf(employeeData.getEmployeeNumber()));
             txtFirstName.setText(employeeData.getPerson().getFirstName());
             txtLastName.setText(employeeData.getPerson().getLastName());
             txtBirthday.setText(String.valueOf(employeeData.getBirthday()));
@@ -149,9 +149,7 @@ public class UpdateEmployee extends JFrame{
             Job job = new Job();
             Compensation compensation = new Compensation();
 
-            // Set all the updated values
-            updatedEmployee.setEmployeeNumber(Integer.parseInt(txtEmployeeNumber.getText()));
-
+            // Set all the updated value
             person.setFirstName(txtFirstName.getText());
             person.setLastName(txtLastName.getText());
             updatedEmployee.setPerson(person);
@@ -184,7 +182,7 @@ public class UpdateEmployee extends JFrame{
 
             // Call the update function
             EmployeeDataFile employeeDataFile = new EmployeeDataFile();
-            if (employeeDataFile.updateEmployee(txtEmployeeNumber.getText(), UpdateEmployee.this, updatedEmployee)) {
+            if (employeeDataFile.updateEmployee(lblEmployeeNumber.getText(), UpdateEmployee.this, updatedEmployee)) {
                 new MainFrame();
                 dispose();
             }

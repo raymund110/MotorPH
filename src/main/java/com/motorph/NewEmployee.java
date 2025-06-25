@@ -125,9 +125,54 @@ public class NewEmployee extends JFrame{
             LocalDate.parse(txtBirthday.getText().trim(), formatter);
         } catch (DateTimeException e) {
             JOptionPane.showMessageDialog(NewEmployee.this,
-                    "Please enter valid date format",
+                    "Please enter valid date format.\nMM/dd/yyyy",
                     "Validation Error",
                     JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        // Check phone number format
+        if (!txtPhoneNumber.getText().matches("\\d{3}-\\d{3}-\\d{3}")) {
+            JOptionPane.showMessageDialog(NewEmployee.this,
+                    "Invalid Phone Number format.\nInput must be in the format 000-000-000",
+                    "Invalid Format",
+                    JOptionPane.ERROR_MESSAGE);
+            txtPhoneNumber.requestFocus();
+            return false;
+        }
+        // Check SSS number format
+        if (!txtSSSNumber.getText().matches("\\d{2}-\\d{7}-\\d{1}")) {
+            JOptionPane.showMessageDialog(NewEmployee.this,
+                    "Invalid SSS Number format.\nInput must be in the format 00-0000000-0",
+                    "Invalid Format",
+                    JOptionPane.ERROR_MESSAGE);
+            txtSSSNumber.requestFocus();
+            return false;
+        }
+        // Check Philhealth number format
+        if (!txtPhilhealthNumber.getText().matches("\\d{12}")) {
+            JOptionPane.showMessageDialog(NewEmployee.this,
+                    "Invalid Philhealth Number.\nPhilhealth Number must have 12 digits",
+                    "Invalid Format",
+                    JOptionPane.ERROR_MESSAGE);
+            txtPhilhealthNumber.requestFocus();
+            return false;
+        }
+        // Check TIN number format
+        if (!txtTINNumber.getText().matches("\\d{3}-\\d{3}-\\d{3}-\\d{3}")) {
+            JOptionPane.showMessageDialog(NewEmployee.this,
+                    "Invalid TIN Number.\nInput must be in the format 000-000-000-000",
+                    "Invalid Format",
+                    JOptionPane.ERROR_MESSAGE);
+            txtTINNumber.requestFocus();
+            return false;
+        }
+        // Check Pagibig number format
+        if (!txtPagibigNumber.getText().matches("\\d{12}")) {
+            JOptionPane.showMessageDialog(NewEmployee.this,
+                    "Invalid Pagibig Number.\nPagibig Number must have 12 digits",
+                    "Invalid Format",
+                    JOptionPane.ERROR_MESSAGE);
+            txtPagibigNumber.requestFocus();
             return false;
         }
         try { //Checking the validity of numerical inputs
@@ -147,7 +192,6 @@ public class NewEmployee extends JFrame{
                     JOptionPane.ERROR_MESSAGE);
             return false;
         }
-
         return true; // inputs are valid
     }
 
@@ -157,7 +201,6 @@ public class NewEmployee extends JFrame{
         String cleaningInputs = money.replace("₱", "").replace(" ", "").replace(",", "");
         return Double.parseDouble(cleaningInputs);
     }
-
     // Save employee data inputs
     public String[] saveEmployee () {
         // Basic info
@@ -194,7 +237,6 @@ public class NewEmployee extends JFrame{
                 , address, phoneNumber, sssID, philhealthID, tinID, pagibigID, status, position, supervisor,
                 basicSalary, riceSubsidy, phoneAllowance, clothingAllowance, grossSemi, hourlyRate};
     }
-
     // Placeholder method for basic information format
     private void basicPlaceholder (JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {
@@ -215,7 +257,6 @@ public class NewEmployee extends JFrame{
             }
         });
     }
-
     // Placeholder method for money format
     private void moneyPlaceholder(JTextField textField, String placeholder) {
         textField.addFocusListener(new FocusAdapter() {
@@ -228,7 +269,6 @@ public class NewEmployee extends JFrame{
             }
             @Override
             public void focusLost(FocusEvent e) {
-                super.focusLost(e);
                 // If peso value was not set
                 if (textField.getText().equals("₱ ")) {
                     textField.setText("");

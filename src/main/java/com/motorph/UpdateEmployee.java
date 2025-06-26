@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class UpdateEmployee extends JFrame{
     private JPanel pnlUpdateEmployee;
-    private JLabel lblEmployeeNumber;
     private JTextField txtFirstName;
     private JTextField txtBirthday;
     private JTextField txtLastName;
@@ -28,6 +27,7 @@ public class UpdateEmployee extends JFrame{
     private JTextField txtPagibigNumber;
     private JButton btnUpdateEmployee;
     private JButton btnBack;
+    private JLabel lblEmployeeNumber;
 
     public UpdateEmployee (String selectedEmployee) {
         this.setContentPane(this.pnlUpdateEmployee);
@@ -150,6 +150,7 @@ public class UpdateEmployee extends JFrame{
             Compensation compensation = new Compensation();
 
             // Set all the updated value
+            updatedEmployee.setEmployeeNumber(Integer.parseInt(lblEmployeeNumber.getText()));
             person.setFirstName(txtFirstName.getText());
             person.setLastName(txtLastName.getText());
             updatedEmployee.setPerson(person);

@@ -32,7 +32,7 @@ public class UpdateEmployee extends JFrame{
     public UpdateEmployee (String selectedEmployee) {
         this.setContentPane(this.pnlUpdateEmployee);
         this.setTitle("MotorPH");
-        this.setSize(800,650);
+        this.setSize(700,820);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         // confirmation on closing the frame
@@ -55,6 +55,17 @@ public class UpdateEmployee extends JFrame{
 
         this.setVisible(true);
         employeeInfo(selectedEmployee);
+
+        // While focused is on JTextArea, TAB key will transfer the focus to the next component instead of giving an indent.
+        txtAddress.setFocusTraversalKeysEnabled(true);
+        InputMap inputMap = txtAddress.getInputMap(JComponent.WHEN_FOCUSED);
+        inputMap.put(KeyStroke.getKeyStroke("TAB"), "focusNext");
+        txtAddress.getActionMap().put("focusNext", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtAddress.transferFocus();
+            }
+        });
 
         btnBack.addActionListener(new ActionListener() {
             @Override

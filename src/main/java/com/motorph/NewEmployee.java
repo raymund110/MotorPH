@@ -15,7 +15,7 @@ public class NewEmployee extends JFrame{
     private JTextField txtLastName;
     private JTextField txtBirthday;
     private JTextField txtPhoneNumber;
-    private JTextField txtAddress;
+    private JTextArea txtAddress;
     private JTextField txtPosition;
     private JTextField txtSupervisor;
     private JTextField txtPhilhealthNumber;
@@ -35,7 +35,7 @@ public class NewEmployee extends JFrame{
     public NewEmployee () {
         this.setContentPane(this.pnlNewEmployee);
         this.setTitle("MotorPH");
-        this.setSize(800,650);
+        this.setSize(700,820);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         // confirmation on closing the frame
@@ -59,7 +59,7 @@ public class NewEmployee extends JFrame{
         this.setVisible(true);
         // Placeholders for users to know the important formats
         basicPlaceholder(txtBirthday, "MM/dd/yyyy");
-        basicPlaceholder(txtSupervisor, "Last Name, FIrst Name");
+        basicPlaceholder(txtSupervisor, "Last Name, First Name");
         basicPlaceholder(txtPhoneNumber, "000-000-000");
         basicPlaceholder(txtSSSNumber, "00-0000000-0");
         basicPlaceholder(txtTINNumber, "000-000-000-000");
@@ -70,6 +70,17 @@ public class NewEmployee extends JFrame{
         moneyPlaceholder(txtClothingAllowance, "₱ 0,000,00");
         moneyPlaceholder(txtGrossSemi, "₱ 00,000,00");
         moneyPlaceholder(txtHourlyRate, "₱ 000,00");
+
+        // While focused is on JTextArea, TAB key will transfer the focus to the next component instead of giving an indent.
+        txtAddress.setFocusTraversalKeysEnabled(true);
+        InputMap inputMap = txtAddress.getInputMap(JComponent.WHEN_FOCUSED);
+        inputMap.put(KeyStroke.getKeyStroke("TAB"), "focusNext");
+        txtAddress.getActionMap().put("focusNext", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtAddress.transferFocus();
+            }
+        });
 
         // Save button
         btnSaveEmployee.addActionListener(new ActionListener() {
@@ -220,7 +231,6 @@ public class NewEmployee extends JFrame{
         String status = String.valueOf(cbxStatus.getSelectedItem());
         String position = txtPosition.getText();
         String supervisor = txtSupervisor.getText();
-
         // Compensation
         // Decimael formatter to match the csv text
         DecimalFormat salaryFormat = new DecimalFormat("#,###"); // No decimal points

@@ -128,7 +128,6 @@ public class EmployeeDataFile {
                                 salaryFormat.format(updatedEmployee.getCompensation().getClothingAllowance()),
                                 salaryFormat.format(updatedEmployee.getCompensation().getGrossSemiMonthlyRate()),
                                 hourlyFormat.format(updatedEmployee.getCompensation().getHourlyRate())
-
                         });
                     } else {
                         updatedData.add(line);

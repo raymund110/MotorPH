@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public class NewEmployee extends JFrame{
     private JPanel pnlNewEmployee;
-    private JTextField txtEmployeeNumber;
+    private JLabel txtEmployeeNumber;
     private JTextField txtFirstName;
     private JTextField txtLastName;
     private JTextField txtBirthday;
@@ -38,6 +38,11 @@ public class NewEmployee extends JFrame{
         this.setSize(700,820);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+
+        // Auto-generate employee number
+        EmployeeDataFile employeeData = new EmployeeDataFile();
+        txtEmployeeNumber.setText(employeeData.generateEmployeeNumber());
+
         // confirmation on closing the frame
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {

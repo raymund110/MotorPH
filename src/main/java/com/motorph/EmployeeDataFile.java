@@ -275,4 +275,32 @@ public class EmployeeDataFile {
         }
         return employee;
     }
+
+    public String generateEmployeeNumber() {
+        int maxNumber = 10000; // Starting number if no employees exist
+
+        try (CSVReader reader = new CSVReaderBuilder(new FileReader(DataFile))
+                .withCSVParser(parser)
+                .build()) {
+
+            reader.readNext(); // Skip header
+            String[] line;
+
+            while ((line = reader.readNext()) != null) {
+                try {
+                    int currentNumber = Integer.parseInt(line[0].trim());
+                    maxNumber = Math.max(maxNumber, currentNumber);
+                } catch (NumberFormatException e) {
+                    // Skip invalid numbers
+                    continue;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error generating employee number: " + e.getMessage());
+        }
+
+        return String.valueOf(maxNumber + 1);
+    }
+
 }

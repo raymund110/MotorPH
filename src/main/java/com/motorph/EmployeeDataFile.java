@@ -276,6 +276,7 @@ public class EmployeeDataFile {
         return employee;
     }
 
+    // Generate employee number everytime user wants to create/add new employee
     public String generateEmployeeNumber() {
         int maxNumber = 10000; // Starting number if no employees exist
 

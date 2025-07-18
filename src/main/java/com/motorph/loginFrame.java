@@ -70,7 +70,8 @@ public class loginFrame extends JFrame{
 
         try (CSVReader reader = new CSVReader(new FileReader(loginData))) {
             String[] line;
-            boolean correct = false;
+            boolean userExists = false;
+            boolean correctCredentials = false;
 
             while ((line = reader.readNext()) != null) {
                 if (line.length >= 4) {
@@ -78,30 +79,44 @@ public class loginFrame extends JFrame{
                     String userPass = line[3].trim();
 
                     // Check if credintials is correct
-                    if (userID.equals(userName) && passwordID.equals(userPass)) {
-                        correct = true;
+                    if (userID.equals(userName)) {
+                        userExists = true;
+                        if (passwordID.equals(userPass)) {
+                            correctCredentials = true;
+                        }
                         break;
                     }
                 }
             }
 
-            if (correct) {
-                new MainFrame();
-                dispose();
-            }
-            else if (userID.isEmpty() && passwordID.isEmpty()) {
+            // Empty fields
+            if (userID.isEmpty() && passwordID.isEmpty()) {
                 JOptionPane.showMessageDialog(loginFrame.this,
                         "Login fields empty.\nEnter your credentials.", "Empty fields", JOptionPane.ERROR_MESSAGE);
                 txtUser.requestFocus();
             }
+            // Empty password field
             else if (passwordID.isEmpty()) {
                 JOptionPane.showMessageDialog(loginFrame.this,
                         "Please enter your password credentials.", "Empty passwords", JOptionPane.ERROR_MESSAGE);
                 psPassword.requestFocus();
             }
+            // Correct Credentials
+            else if (correctCredentials) {
+                new MainFrame();
+                dispose();
+            }
+            // user correct but wrong password
+            else if (userExists) {
+                JOptionPane.showMessageDialog(loginFrame.this,
+                        "Incorrect password. Please try again.", "Invalid Password", JOptionPane.ERROR_MESSAGE);
+                psPassword.setText("");
+                psPassword.requestFocus();
+            }
+            // user not found in login credentials files
             else {
                 JOptionPane.showMessageDialog(loginFrame.this,
-                        "Invalid Credential Try Again!", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                        "User not found. Please check your credentials.", "Invalid User", JOptionPane.ERROR_MESSAGE);
                 // Clear the input fields
                 txtUser.setText("");
                 psPassword.setText("");
